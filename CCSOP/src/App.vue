@@ -12,7 +12,7 @@ const login = async () => {
     // Construction du header HTTP Basic (Base64)
     const token = btoa(`${username.value}:${password.value}`)
 
-    const response = await axios.get('http://localhost:8080/api/login', {
+    const response = await axios.get('http://localhost/api/login', {
       headers: {
         'Authorization': `Basic ${token}`
       }
