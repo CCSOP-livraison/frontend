@@ -9,15 +9,11 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function login(username, password) {
     try {
-      const token = btoa(`${username}:${password}`)
 
-      const response = await api.get('/login', {
-        headers: {
-          'Authorization': `Basic ${token}`
-        }
+      const response = await api.post('auth/login', {
+        email: 'user@domain.com',
+        password: 'password123'
       })
-
-      message.value = response.data.message
       isError.value = false
       isAuthenticated.value = true
     } catch (err) {
@@ -27,10 +23,19 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  async function register(email, password) {
+
+      const response = await api.post('auth/register', {
+        email: email,
+        password: password
+      })
+  }
+
   return {
     message,
     isError,
     isAuthenticated,
-    login
+    login,
+    register
   }
 })

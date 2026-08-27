@@ -1,4 +1,3 @@
-
 <script setup>
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
@@ -11,15 +10,15 @@ const email = ref('')
 const password = ref('')
 
 const handleSubmit = () => {
-  authStore.login(email.value, password.value)
+  authStore.register(email.value, password.value)
 }
 </script>
 
 <template>
   <form @submit.prevent="handleSubmit">
-    <input v-model="email" placeholder="Votre email" />
+    <input v-model="email" placeholder="Votre Email" />
     <input v-model="password" type="password" placeholder="Mot de passe" />
-    <button type="submit">Se connecter</button>
+    <button type="submit">S'enregistrer</button>
   </form>
 
   <p v-if="message" :style="{ color: isError ? 'red' : 'green' }">
