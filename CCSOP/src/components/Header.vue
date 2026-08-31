@@ -1,13 +1,23 @@
 <script setup>
-import LoginView from '@/views/LoginView.vue'
+import LinkHeader from '@/components/LinkHeader.vue'
 </script>
 
 <template>
   <header class="u-clearfix u-header u-sticky u-header" id="header">
+    <!-- Ajout de padding horizontal via px-4 (ou un style en ligne) pour décoller le contenu des bords -->
     <div
       class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1"
+      style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        padding: 0 20px;
+      "
     >
-      <a href="#" class="u-image u-logo u-image-1">
+      <!-- Logo avec une marge ou un espacement géré par le conteneur -->
+      <a href="#" class="u-image u-logo u-image-1" style="margin-left: 10px">
         <img src="../../public/images/default-logo.png" class="u-logo-image u-logo-image-1" />
       </a>
       <nav
@@ -45,13 +55,9 @@ import LoginView from '@/views/LoginView.vue'
           </a>
         </div>
         <div class="u-custom-menu u-nav-container">
-          <ul class="u-nav u-unstyled u-nav-1" role="menubar">
-            <li role="none" class="u-nav-item">
-              <RouterLink to="/login">se connecter</RouterLink>
-            </li>
-            <li role="none" class="u-nav-item">
-              <RouterLink to="/register">s'enregistrer</RouterLink>
-            </li>
+          <!-- Ajout d'un gap en CSS pour espacer les éléments de la liste horizontalement -->
+          <ul class="u-nav u-unstyled u-nav-1" role="menubar" style="display: flex; gap: 20px">
+            <LinkHeader></LinkHeader>
           </ul>
         </div>
         <div
@@ -66,16 +72,7 @@ import LoginView from '@/views/LoginView.vue'
             <div class="u-inner-container-layout u-sidenav-overflow">
               <div class="u-menu-close" tabindex="-1" aria-label="Close menu"></div>
               <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2" role="menubar">
-                <li role="none" class="u-nav-item">
-                  <li role="none" class="u-nav-item">
-                    <RouterLink to="/login">se connecter</RouterLink>
-                  </li>
-                </li>
-                <li role="none" class="u-nav-item">
-                  <li role="none" class="u-nav-item">
-                    <RouterLink to="/register">s'enregistrer</RouterLink>
-                  </li>
-                </li>
+                <LinkHeader></LinkHeader>
               </ul>
             </div>
           </div>

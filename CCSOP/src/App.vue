@@ -1,6 +1,6 @@
 <script setup>
-import AppFooter from './components/footer.vue'
-import AppHeader from './components/header.vue'
+import AppFooter from './components/Footer.vue'
+import AppHeader from './components/Header.vue'
 </script>
 <template>
   <AppHeader />
