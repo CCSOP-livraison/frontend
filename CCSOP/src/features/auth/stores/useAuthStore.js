@@ -22,7 +22,8 @@ export const useAuthStore = defineStore('auth', () => {
           message.value = "Connexion réussie !"
         } catch (err) {
           console.error('Détail de l\'erreur:', err)
-          message.value = "Échec de l'authentification (401 Unauthorized ou Erreur réseau)"
+          message.value =
+            "Impossible d'envoyer votre message. Merci de corriger les erreurs et réessayer."
           isError.value = true
           isAuthenticated.value = false
         }

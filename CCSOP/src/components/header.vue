@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import LoginView from '@/views/LoginView.vue'
+</script>
 
 <template>
   <header class="u-clearfix u-header u-sticky u-header" id="header">
@@ -45,20 +47,10 @@
         <div class="u-custom-menu u-nav-container">
           <ul class="u-nav u-unstyled u-nav-1" role="menubar">
             <li role="none" class="u-nav-item">
-              <a
-                role="menuitem"
-                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base u-nav-link-2"
-                href="./"
-                >se connecter</a
-              >
+              <RouterLink to="/login">se connecter</RouterLink>
             </li>
             <li role="none" class="u-nav-item">
-              <a
-                tabindex="-1"
-                role="menuitem"
-                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base u-nav-link-2"
-                >S'enregistrer</a
-              >
+              <RouterLink to="/register">s'enregistrer</RouterLink>
             </li>
           </ul>
         </div>
@@ -75,12 +67,14 @@
               <div class="u-menu-close" tabindex="-1" aria-label="Close menu"></div>
               <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2" role="menubar">
                 <li role="none" class="u-nav-item">
-                  <a role="menuitem" class="u-button-style u-nav-link" href="./">se connecter</a>
+                  <li role="none" class="u-nav-item">
+                    <RouterLink to="/login">se connecter</RouterLink>
+                  </li>
                 </li>
                 <li role="none" class="u-nav-item">
-                  <a tabindex="-1" role="menuitem" class="u-button-style u-nav-link"
-                    >S'enregistrer</a
-                  >
+                  <li role="none" class="u-nav-item">
+                    <RouterLink to="/register">s'enregistrer</RouterLink>
+                  </li>
                 </li>
               </ul>
             </div>
