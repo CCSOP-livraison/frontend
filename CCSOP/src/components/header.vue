@@ -6,7 +6,7 @@
       class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1"
     >
       <a href="#" class="u-image u-logo u-image-1">
-        <img src="images/default-logo.png" class="u-logo-image u-logo-image-1" />
+        <img src="../../public/images/default-logo.png" class="u-logo-image u-logo-image-1" />
       </a>
       <nav
         class="u-menu u-menu-one-level u-offcanvas u-menu-1"
