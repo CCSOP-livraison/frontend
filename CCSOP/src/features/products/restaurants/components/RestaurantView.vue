@@ -1,4 +1,5 @@
-<script setup></script>
+<script setup>
+</script>
 
 <template>
   <body
@@ -44,11 +45,8 @@
           class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius u-btn-1"
           >modifier la carte
         </a>
-        <a
-          href=""
-          class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius u-btn-2"
-          >voir la carte </a
-        ><span
+          <RouterLink class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius u-btn-2" to="/menu">voir la carte</RouterLink>
+        <span
           class="u-border-2 u-border-palette-1-base u-icon u-icon-circle u-text-palette-1-base u-icon-1"
           ><svg
             class="u-svg-link"

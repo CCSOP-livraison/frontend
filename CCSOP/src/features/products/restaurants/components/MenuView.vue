@@ -81,12 +81,24 @@ const decrement = (item) => {
             </div>
           </div>
         </div>
+        <div class="cart-link-container">
+          <RouterLink
+            class="u-align-center u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius u-btn-2"
+            to="/cart"
+            >voir la panier</RouterLink
+          >
+        </div>
       </div>
     </section>
   </body>
 </template>
 
 <style scoped>
+.cart-link-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
 .u-section-1 {
   background-image: none;
   padding: 40px 0;

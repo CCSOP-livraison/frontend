@@ -19,7 +19,7 @@
           data-animation-name="customAnimationIn"
           data-animation-duration="1500"
         >
-          Nos restaurant partenaire
+          Nos restaurants partenaire
         </h2>
         <div class="u-expanded-width u-list u-list-1">
           <div class="u-repeater u-repeater-1">
@@ -43,10 +43,9 @@
                 <p class="u-align-center u-text u-text-3">
                   Casa bianca, le buffet de pâtes de vos rêves
                 </p>
-                <a
-                  href="#"
-                  class="u-align-center u-border-2 u-border-active-palette-3-base u-border-hover-palette-3-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-3-base u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-style u-none u-radius-0 u-text-active-palette-3-base u-text-body-color u-text-hover-palette-3-base u-top-left-radius-0 u-top-right-radius-0 u-btn-1"
-                  >Apprendre encore plus</a
+                <li role="none" class="u-nav-item">
+                  <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
+                </li>
                 >
               </div>
             </div>
@@ -70,11 +69,9 @@
                 <p class="u-align-center u-text u-text-5">
                   + de 50 burgers différents sur notre carte.&nbsp;
                 </p>
-                <a
-                  href="#"
-                  class="u-align-center u-border-2 u-border-active-palette-3-base u-border-hover-palette-3-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-3-base u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-style u-none u-radius-0 u-text-active-palette-3-base u-text-body-color u-text-hover-palette-3-base u-top-left-radius-0 u-top-right-radius-0 u-btn-2"
-                  >Apprendre encore plus</a
-                >
+                <li role="none" class="u-nav-item">
+                  <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
+                </li>
               </div>
             </div>
             <div
@@ -97,11 +94,9 @@
                 <p class="u-align-center u-text u-text-7">
                   Venez découvrir notre crêpe bretonne la spécialité de la maison.
                 </p>
-                <a
-                  href="#"
-                  class="u-align-center u-border-2 u-border-active-palette-3-base u-border-hover-palette-3-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-3-base u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-style u-none u-radius-0 u-text-active-palette-3-base u-text-body-color u-text-hover-palette-3-base u-top-left-radius-0 u-top-right-radius-0 u-btn-3"
-                  >Apprendre encore plus</a
-                >
+                <li role="none" class="u-nav-item">
+                  <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
+                </li>
               </div>
             </div>
             <div
@@ -125,11 +120,9 @@
                   venez découvrir nos merveilleuse salade et autre met, carte totalement
                   végétarienne
                 </p>
-                <a
-                  href="#"
-                  class="u-align-center u-border-2 u-border-active-palette-3-base u-border-hover-palette-3-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-3-base u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-style u-none u-radius-0 u-text-active-palette-3-base u-text-body-color u-text-hover-palette-3-base u-top-left-radius-0 u-top-right-radius-0 u-btn-4"
-                  >Apprendre encore plus</a
-                >
+                <li role="none" class="u-nav-item">
+                  <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
+                </li>
               </div>
             </div>
             <div
@@ -152,11 +145,9 @@
                 <p class="u-align-center u-text u-text-11">
                   venez découvrir la meilleur tourte du monde
                 </p>
-                <a
-                  href="#"
-                  class="u-align-center u-border-2 u-border-active-palette-3-base u-border-hover-palette-3-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-3-base u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-style u-none u-radius-0 u-text-active-palette-3-base u-text-body-color u-text-hover-palette-3-base u-top-left-radius-0 u-top-right-radius-0 u-btn-5"
-                  >Apprendre encore plus</a
-                >
+                <li role="none" class="u-nav-item">
+                  <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
+                </li>
               </div>
             </div>
             <div
@@ -179,11 +170,9 @@
                 <p class="u-align-center u-text u-text-13">
                   Venez découvrir nos plus de 100 parfum de glaces différents
                 </p>
-                <a
-                  href="#"
-                  class="u-align-center u-border-2 u-border-active-palette-3-base u-border-hover-palette-3-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-3-base u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-style u-none u-radius-0 u-text-active-palette-3-base u-text-body-color u-text-hover-palette-3-base u-top-left-radius-0 u-top-right-radius-0 u-btn-6"
-                  >Apprendre encore plus</a
-                >
+                <li role="none" class="u-nav-item">
+                  <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
+                </li>
               </div>
             </div>
             <div
@@ -206,11 +195,9 @@
                 <p class="u-align-center u-text u-text-15">
                   Venez découvrir tout les plat classique revisité
                 </p>
-                <a
-                  href="#"
-                  class="u-align-center u-border-2 u-border-active-palette-3-base u-border-hover-palette-3-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-3-base u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-style u-none u-radius-0 u-text-active-palette-3-base u-text-body-color u-text-hover-palette-3-base u-top-left-radius-0 u-top-right-radius-0 u-btn-7"
-                  >Apprendre encore plus</a
-                >
+                <li role="none" class="u-nav-item">
+                  <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
+                </li>
               </div>
             </div>
             <div
@@ -233,11 +220,9 @@
                 <p class="u-align-center u-text u-text-17">
                   Venez découvrir nos recette traditionnelle
                 </p>
-                <a
-                  href="#"
-                  class="u-align-center u-border-2 u-border-active-palette-3-base u-border-hover-palette-3-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-3-base u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-style u-none u-radius-0 u-text-active-palette-3-base u-text-body-color u-text-hover-palette-3-base u-top-left-radius-0 u-top-right-radius-0 u-btn-8"
-                  >Apprendre encore plus</a
-                >
+                <li role="none" class="u-nav-item">
+                  <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
+                </li>
               </div>
             </div>
             <div
@@ -260,11 +245,9 @@
                 <p class="u-align-center u-text u-text-19">
                   venez découvrir nos soupe et bouillons
                 </p>
-                <a
-                  href="#"
-                  class="u-align-center u-border-2 u-border-active-palette-3-base u-border-hover-palette-3-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-3-base u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-style u-none u-radius-0 u-text-active-palette-3-base u-text-body-color u-text-hover-palette-3-base u-top-left-radius-0 u-top-right-radius-0 u-btn-9"
-                  >Apprendre encore plus</a
-                >
+                <li role="none" class="u-nav-item">
+                  <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
+                </li>
               </div>
             </div>
           </div>
