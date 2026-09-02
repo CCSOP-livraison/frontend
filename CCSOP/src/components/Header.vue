@@ -4,7 +4,6 @@ import LinkHeader from '@/components/LinkHeader.vue'
 
 <template>
   <header class="u-clearfix u-header u-sticky u-header" id="header">
-    <!-- Ajout de padding horizontal via px-4 (ou un style en ligne) pour décoller le contenu des bords -->
     <div
       class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1"
       style="
@@ -16,9 +15,8 @@ import LinkHeader from '@/components/LinkHeader.vue'
         padding: 0 20px;
       "
     >
-      <!-- Logo avec une marge ou un espacement géré par le conteneur -->
       <a href="#" class="u-image u-logo u-image-1" style="margin-left: 10px">
-        <img src="../../public/images/default-logo.png" class="u-logo-image u-logo-image-1" />
+        <img alt="logo" src="../../public/images/default-logo.png" class="u-logo-image u-logo-image-1" />
       </a>
       <nav
         class="u-menu u-menu-one-level u-offcanvas u-menu-1"
@@ -38,7 +36,6 @@ import LinkHeader from '@/components/LinkHeader.vue'
             </svg>
             <svg
               class="u-svg-content"
-              version="1.1"
               id="menu-hamburger"
               viewBox="0 0 16 16"
               x="0px"
@@ -55,7 +52,6 @@ import LinkHeader from '@/components/LinkHeader.vue'
           </a>
         </div>
         <div class="u-custom-menu u-nav-container">
-          <!-- Ajout d'un gap en CSS pour espacer les éléments de la liste horizontalement -->
           <ul class="u-nav u-unstyled u-nav-1" role="menubar" style="display: flex; gap: 20px">
             <LinkHeader></LinkHeader>
           </ul>
