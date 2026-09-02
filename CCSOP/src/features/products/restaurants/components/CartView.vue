@@ -43,7 +43,6 @@ const TVA = computed(() => {
   return subtotal.value * TVARate
 })
 
-// Calcul du prix final
 const finalPrice = computed(() => {
   return subtotal.value + taxes.value+TVA.value;
 })
@@ -58,12 +57,10 @@ const finalPrice = computed(() => {
       <div class="u-clearfix u-sheet u-sheet-1">
         <h2 class="u-align-center u-text u-text-default u-text-1">Votre Panier</h2>
 
-        <!-- Si le panier est vide -->
         <div v-if="cartItems.length === 0" class="empty-cart">
           <p>Votre panier est actuellement vide.</p>
         </div>
 
-        <!-- Si le panier contient des articles -->
         <div v-else class="cart-container">
           <div class="cart-items-list">
             <div v-for="item in cartItems" :key="item.id" class="cart-item-card">
@@ -86,7 +83,6 @@ const finalPrice = computed(() => {
             </div>
           </div>
 
-          <!-- Section Résumé & Totaux -->
           <div class="cart-summary-box">
             <h3>Résumé de la commande</h3>
             <div class="summary-line">

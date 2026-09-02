@@ -54,7 +54,7 @@ const decrement = (item) => {
 
         <div class="u-expanded-width u-list u-list-1">
           <div class="u-repeater u-repeater-1">
-            <!-- Boucle sur les plats du menu -->
+
             <div
               v-for="item in menuItems"
               :key="item.id"
