@@ -29,7 +29,6 @@
                         x="0px"
                         y="0px"
                         id="svg-8ead"
-                        style="enable-background: new 0 0 55.25 55.25"
                       >
                         <g>
                           <path
@@ -77,7 +76,6 @@
                         x="0px"
                         y="0px"
                         id="svg-65aa"
-                        style="enable-background: new 0 0 51.976 51.976"
                       >
                         <g>
                           <path

@@ -26,14 +26,12 @@
                       ><svg
                         xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink"
-                        version="1.1"
                         xml:space="preserve"
                         class="u-svg-content"
                         viewBox="0 0 50 50"
                         x="0px"
                         y="0px"
                         id="svg-4b1d"
-                        style="enable-background: new 0 0 50 50"
                       >
                         <circle style="fill: #d75a4a" cx="25" cy="25" r="25"></circle>
                         <polyline
@@ -86,7 +84,6 @@
                         x="0px"
                         y="0px"
                         id="svg-de5b"
-                        style="enable-background: new 0 0 58 58"
                       >
                         <path
                           style="fill: #7383bf"
@@ -135,7 +132,6 @@
                         x="0px"
                         y="0px"
                         id="svg-d492"
-                        style="enable-background: new 0 0 53.867 53.867"
                       >
                         <polygon
                           style="fill: currentColor"

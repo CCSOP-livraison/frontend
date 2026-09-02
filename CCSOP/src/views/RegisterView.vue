@@ -1,5 +1,4 @@
 <script setup>
-import LoginForm from '@/features/auth/components/RegisterForm.vue'
 import RegisterForm from "@/features/auth/components/RegisterForm.vue";
 </script>
 
