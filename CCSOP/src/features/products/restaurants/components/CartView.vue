@@ -66,7 +66,7 @@ const finalPrice = computed(() => {
             <div v-for="item in cartItems" :key="item.id" class="cart-item-card">
               <div class="item-info">
                 <h4 class="u-text-2">{{ item.name }}</h4>
-                <p class="u-text-3">Prix unitaire : {{ item.price.toFixed(2) }} €</p>
+                <p class="u-text-3">Prix unitaire : {{ item.price.toFixed(2) }} CHF</p>
               </div>
 
               <div class="item-actions">
@@ -76,7 +76,7 @@ const finalPrice = computed(() => {
                   <button @click="increment(item)" class="qty-btn">+</button>
                 </div>
                 <span class="item-total">
-                  <strong>{{ (item.price * item.quantity).toFixed(2) }} €</strong>
+                  <strong>{{ (item.price * item.quantity).toFixed(2) }} CHF</strong>
                 </span>
                 <button @click="removeItem(item.id)" class="remove-btn" title="Supprimer">×</button>
               </div>
@@ -87,20 +87,20 @@ const finalPrice = computed(() => {
             <h3>Résumé de la commande</h3>
             <div class="summary-line">
               <span>Sous-total</span>
-              <span>{{ subtotal.toFixed(2) }} €</span>
+              <span>{{ subtotal.toFixed(2) }} CHF</span>
             </div>
             <div class="summary-line">
               <span>Consigne (10%)</span>
-              <span>{{ taxes.toFixed(2) }} €</span>
+              <span>{{ taxes.toFixed(2) }} CHF</span>
             </div>
             <div class="summary-line">
               <span>TVA (8,1%)</span>
-              <span>{{ TVA.toFixed(2) }} €</span>
+              <span>{{ TVA.toFixed(2) }} CHF</span>
             </div>
             <hr class="summary-divider" />
             <div class="summary-line final-line">
               <span>Prix final</span>
-              <span>{{ finalPrice.toFixed(2) }} €</span>
+              <span>{{ finalPrice.toFixed(2) }} CHF</span>
             </div>
 
             <button class="u-btn u-button-style checkout-btn">Valider la commande</button>
