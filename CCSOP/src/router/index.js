@@ -44,6 +44,16 @@ const router = createRouter({
       name: 'dashboard-restaurant',
       component: () => import('@/features/products/restaurants/components/RestaurantView.vue'),
     },
+    {
+      path: '/menu',
+      name: 'menu',
+      component: () => import('@/features/products/restaurants/components/MenuView.vue'),
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: () => import('@/features/products/restaurants/components/CartView.vue'),
+    },
   ],
 })
 

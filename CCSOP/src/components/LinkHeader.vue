@@ -22,6 +22,12 @@
   <li role="none" class="u-nav-item">
     <RouterLink to="/dashboard-moderation">dashboard modérateur</RouterLink>
   </li>
+  <li role="none" class="u-nav-item">
+    <RouterLink to="/menu">menu</RouterLink>
+  </li>
+  <li role="none" class="u-nav-item">
+    <RouterLink to="/cart">cart</RouterLink>
+  </li>
 </template>
 
 <style scoped></style>
