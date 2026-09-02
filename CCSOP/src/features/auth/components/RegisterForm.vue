@@ -1,11 +1,8 @@
 <script setup>
 import { ref } from 'vue'
-import { storeToRefs } from 'pinia'
 import { useAuthStore } from '../stores/useAuthStore'
 
 const authStore = useAuthStore()
-const { message, isError } = storeToRefs(authStore)
-
 const email = ref('')
 const password = ref('')
 
@@ -15,7 +12,6 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <link rel="stylesheet" href="../../../../public/css/register.css" media="screen" />
   <body>
     <section class="u-clearfix u-section-1" id="block-1">
       <div class="u-clearfix u-sheet u-sheet-1">
@@ -115,8 +111,7 @@ const handleSubmit = () => {
                   font-size: 16px;
                   font-weight: bold;
                   cursor: pointer;
-                  border-radius: 0px;
-                "
+              "
               >
                 S'enregistrer
               </button>
@@ -163,11 +158,11 @@ const handleSubmit = () => {
   margin-left: 0;
 }
 
-.u-section-1 .u-form-group-8 {
+.u-section-1 {
   margin-left: 0;
 }
 
-.u-section-1 .u-text-1 {
+.u-section-1 {
   margin-left: auto;
   margin-right: auto;
 }
