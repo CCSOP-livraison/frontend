@@ -17,7 +17,7 @@
             <svg class="u-svg-link" viewBox="0 0 24 24"><use xlink:href="#svg-ad78"></use></svg>
             <svg
               class="u-svg-content"
-              version="1.1"
+
               id="svg-ad78"
               viewBox="0 0 16 16"
               x="0px"
@@ -55,15 +55,12 @@
                   <a
                     role="menuitem"
                     class="u-button-style u-nav-link"
-                    href="register-restaurateur.html"
                     >register restaurateur</a
                   >
                 </li>
                 <li role="none" class="u-nav-item">
-                  <a role="menuitem" class="u-button-style u-nav-link" href="login.html">login</a>
                 </li>
                 <li role="none" class="u-nav-item">
-                  <a role="menuitem" class="u-button-style u-nav-link" href="Page-1.html">Page 1</a>
                 </li>
               </ul>
             </div>
