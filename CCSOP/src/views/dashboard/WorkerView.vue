@@ -37,7 +37,6 @@
                 <p class="u-align-center u-text u-text-4">
                   distance estimé avec le restaurant : 10 km
                 </p>
-                <p class="u-align-center u-text u-text-5">commande terminé dans : 15 min</p>
               </div>
             </div>
             <div
@@ -54,7 +53,6 @@
                 <p class="u-align-center u-text u-text-8">
                   distance estimé avec le restaurant : 15 km
                 </p>
-                <p class="u-align-center u-text u-text-9">commande terminé dans : 20 min</p>
               </div>
             </div>
             <div
@@ -71,7 +69,6 @@
                 <p class="u-align-center u-text u-text-12">
                   distance estimé avec le restaurant : 20 km
                 </p>
-                <p class="u-align-center u-text u-text-13">commande terminé dans : 45 min</p>
               </div>
             </div>
             <div
@@ -88,7 +85,6 @@
                 <p class="u-align-center u-text u-text-16">
                   distance estimé avec le restaurant : 5 km
                 </p>
-                <p class="u-align-center u-text u-text-17">commande terminé dans : 1 heure</p>
               </div>
             </div>
             <div
@@ -105,7 +101,6 @@
                 <p class="u-align-center u-text u-text-20">
                   distance estimé avec le restaurant : 50 km
                 </p>
-                <p class="u-align-center u-text u-text-21">commande terminé dans : 30 min</p>
               </div>
             </div>
             <div
@@ -122,7 +117,6 @@
                 <p class="u-align-center u-text u-text-24">
                   distance estimé avec le restaurant : 100 km
                 </p>
-                <p class="u-align-center u-text u-text-25">commande terminé dans : 30 min</p>
               </div>
             </div>
             <div
@@ -139,7 +133,6 @@
                 <p class="u-align-center u-text u-text-28">
                   distance estimé avec le restaurant : 10 km
                 </p>
-                <p class="u-align-center u-text u-text-29">commande terminé dans : 45 min</p>
               </div>
             </div>
             <div
@@ -156,7 +149,6 @@
                 <p class="u-align-center u-text u-text-32">
                   distance estimé avec le restaurant : 5 km
                 </p>
-                <p class="u-align-center u-text u-text-33">commande terminé dans : 20 min</p>
               </div>
             </div>
             <div
@@ -173,7 +165,6 @@
                 <p class="u-align-center u-text u-text-36">
                   distance estimé avec le restaurant : 20 km
                 </p>
-                <p class="u-align-center u-text u-text-37">commande terminé dans : 15 min</p>
               </div>
             </div>
           </div>

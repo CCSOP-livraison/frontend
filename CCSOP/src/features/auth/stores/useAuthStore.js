@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import api from '@/services/api'
+import router from '@/router'
 
 export const useAuthStore = defineStore('auth', () => {
   const message = ref('')
@@ -8,15 +9,24 @@ export const useAuthStore = defineStore('auth', () => {
   const isAuthenticated = ref(false)
       async function login(username, password) {
         try {
-          // Utiliser POST et non GET pour envoyer des identifiants
           const response = await api.post('auth/login', {
             email: username,
             password: password
           })
-
-          // Si Axios / instance personnalisée, les données sont dans response.data
-          console.log('Connexion réussie:', response.data)
-
+          switch (response.data.roles[0].name) {
+            case 'ADMIN':
+              router.push('/dashboard-admin')
+              break
+            case 'MODERATION':
+              router.push('/dashboard-moderation')
+              break
+            case 'CUSTOMER':
+              router.push('/dashboard-customer')
+              break
+            case 'DELIVER':
+              router.push('/dashboard-worker')
+              break
+          }
           isError.value = false
           isAuthenticated.value = true
           message.value = "Connexion réussie !"
