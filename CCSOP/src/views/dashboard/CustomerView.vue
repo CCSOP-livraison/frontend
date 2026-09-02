@@ -43,10 +43,7 @@
                 <p class="u-align-center u-text u-text-3">
                   Casa bianca, le buffet de pâtes de vos rêves
                 </p>
-                <li role="none" class="u-nav-item">
                   <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
-                </li>
-                >
               </div>
             </div>
             <div
@@ -69,9 +66,7 @@
                 <p class="u-align-center u-text u-text-5">
                   + de 50 burgers différents sur notre carte.&nbsp;
                 </p>
-                <li role="none" class="u-nav-item">
                   <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
-                </li>
               </div>
             </div>
             <div
@@ -94,9 +89,7 @@
                 <p class="u-align-center u-text u-text-7">
                   Venez découvrir notre crêpe bretonne la spécialité de la maison.
                 </p>
-                <li role="none" class="u-nav-item">
                   <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
-                </li>
               </div>
             </div>
             <div
@@ -120,9 +113,7 @@
                   venez découvrir nos merveilleuse salade et autre met, carte totalement
                   végétarienne
                 </p>
-                <li role="none" class="u-nav-item">
                   <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
-                </li>
               </div>
             </div>
             <div
@@ -145,9 +136,7 @@
                 <p class="u-align-center u-text u-text-11">
                   venez découvrir la meilleur tourte du monde
                 </p>
-                <li role="none" class="u-nav-item">
                   <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
-                </li>
               </div>
             </div>
             <div
@@ -170,9 +159,7 @@
                 <p class="u-align-center u-text u-text-13">
                   Venez découvrir nos plus de 100 parfum de glaces différents
                 </p>
-                <li role="none" class="u-nav-item">
                   <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
-                </li>
               </div>
             </div>
             <div
@@ -195,9 +182,7 @@
                 <p class="u-align-center u-text u-text-15">
                   Venez découvrir tout les plat classique revisité
                 </p>
-                <li role="none" class="u-nav-item">
                   <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
-                </li>
               </div>
             </div>
             <div
@@ -220,9 +205,7 @@
                 <p class="u-align-center u-text u-text-17">
                   Venez découvrir nos recette traditionnelle
                 </p>
-                <li role="none" class="u-nav-item">
                   <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
-                </li>
               </div>
             </div>
             <div
@@ -245,9 +228,7 @@
                 <p class="u-align-center u-text u-text-19">
                   venez découvrir nos soupe et bouillons
                 </p>
-                <li role="none" class="u-nav-item">
                   <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
-                </li>
               </div>
             </div>
           </div>
@@ -318,7 +299,7 @@
   margin: 11px 40px 0 20px;
 }
 
-.u-section-1 .u-btn-1 {
+.u-section-1 {
   background-image: none;
   text-transform: uppercase;
   font-size: 0.875rem;
@@ -355,7 +336,7 @@
   margin: 11px 40px 0 20px;
 }
 
-.u-section-1 .u-btn-2 {
+.u-section-1 {
   background-image: none;
   text-transform: uppercase;
   font-size: 0.875rem;
@@ -394,7 +375,7 @@
   margin: 11px 40px 0 20px;
 }
 
-.u-section-1 .u-btn-3 {
+.u-section-1  {
   background-image: none;
   text-transform: uppercase;
   font-size: 0.875rem;
@@ -433,7 +414,7 @@
   margin: 11px 40px 0 20px;
 }
 
-.u-section-1 .u-btn-4 {
+.u-section-1 {
   background-image: none;
   text-transform: uppercase;
   font-size: 0.875rem;
@@ -472,7 +453,7 @@
   margin: 11px 40px 0 20px;
 }
 
-.u-section-1 .u-btn-5 {
+.u-section-1 {
   background-image: none;
   text-transform: uppercase;
   font-size: 0.875rem;
@@ -511,7 +492,7 @@
   margin: 11px 40px 0 20px;
 }
 
-.u-section-1 .u-btn-6 {
+.u-section-1 {
   background-image: none;
   text-transform: uppercase;
   font-size: 0.875rem;
@@ -549,7 +530,7 @@
   margin: 11px 40px 0 20px;
 }
 
-.u-section-1 .u-btn-7 {
+.u-section-1 {
   background-image: none;
   text-transform: uppercase;
   font-size: 0.875rem;
@@ -576,7 +557,7 @@
   height: 278px;
   margin-top: -10px;
   margin-bottom: 0;
-  object-position: 50% 0%;
+  object-position: 50%;
 }
 
 .u-section-1 .u-text-16 {
@@ -589,7 +570,7 @@
   margin: 11px 40px 0 20px;
 }
 
-.u-section-1 .u-btn-8 {
+.u-section-1 {
   background-image: none;
   text-transform: uppercase;
   font-size: 0.875rem;
@@ -627,7 +608,7 @@
   margin: 11px 40px 0 20px;
 }
 
-.u-section-1 .u-btn-9 {
+.u-section-1 {
   background-image: none;
   text-transform: uppercase;
   font-size: 0.875rem;
@@ -665,7 +646,7 @@
     margin-right: 0;
   }
 
-  .u-section-1 .u-btn-1 {
+  .u-section-1 {
     margin-top: 40px;
   }
 
@@ -686,7 +667,7 @@
     margin-left: 0;
   }
 
-  .u-section-1 .u-btn-2 {
+  .u-section-1 {
     margin-top: 40px;
   }
 
@@ -707,7 +688,7 @@
     margin-left: 0;
   }
 
-  .u-section-1 .u-btn-3 {
+  .u-section-1 {
     margin-top: 40px;
   }
 
@@ -728,7 +709,7 @@
     margin-left: 0;
   }
 
-  .u-section-1 .u-btn-4 {
+  .u-section-1 {
     margin-top: 40px;
   }
 
@@ -749,7 +730,7 @@
     margin-left: 0;
   }
 
-  .u-section-1 .u-btn-5 {
+  .u-section-1{
     margin-top: 40px;
   }
 
@@ -770,7 +751,7 @@
     margin-left: 0;
   }
 
-  .u-section-1 .u-btn-6 {
+  .u-section-1 {
     margin-top: 40px;
   }
 
@@ -791,7 +772,7 @@
     margin-left: 0;
   }
 
-  .u-section-1 .u-btn-7 {
+  .u-section-1  {
     margin-top: 40px;
   }
 
@@ -812,7 +793,7 @@
     margin-left: 0;
   }
 
-  .u-section-1 .u-btn-8 {
+  .u-section-1 {
     margin-top: 40px;
   }
 
@@ -833,7 +814,7 @@
     margin-left: 0;
   }
 
-  .u-section-1 .u-btn-9 {
+  .u-section-1 {
     margin-top: 40px;
   }
 }
@@ -1009,7 +990,7 @@
     margin-right: 30px;
   }
 
-  .u-section-1 .u-btn-1 {
+  .u-section-1 {
     margin-top: 72px;
   }
 
@@ -1022,7 +1003,7 @@
     margin-right: 30px;
   }
 
-  .u-section-1 .u-btn-2 {
+  .u-section-1 {
     margin-top: 72px;
   }
 
@@ -1035,7 +1016,7 @@
     margin-right: 30px;
   }
 
-  .u-section-1 .u-btn-3 {
+  .u-section-1 {
     margin-top: 72px;
   }
 
@@ -1048,7 +1029,7 @@
     margin-right: 30px;
   }
 
-  .u-section-1 .u-btn-4 {
+  .u-section-1 {
     margin-top: 72px;
   }
 
@@ -1061,7 +1042,7 @@
     margin-right: 30px;
   }
 
-  .u-section-1 .u-btn-5 {
+  .u-section-1 {
     margin-top: 72px;
   }
 
@@ -1074,7 +1055,7 @@
     margin-right: 30px;
   }
 
-  .u-section-1 .u-btn-6 {
+  .u-section-1 {
     margin-top: 72px;
   }
 
@@ -1087,7 +1068,7 @@
     margin-right: 30px;
   }
 
-  .u-section-1 .u-btn-7 {
+  .u-section-1 {
     margin-top: 72px;
   }
 
@@ -1100,7 +1081,7 @@
     margin-right: 30px;
   }
 
-  .u-section-1 .u-btn-8 {
+  .u-section-1 {
     margin-top: 72px;
   }
 
@@ -1113,7 +1094,7 @@
     margin-right: 30px;
   }
 
-  .u-section-1 .u-btn-9 {
+  .u-section-1 {
     margin-top: 72px;
   }
 }
@@ -1132,7 +1113,7 @@
     margin-right: 0;
   }
 
-  .u-section-1 .u-btn-1 {
+  .u-section-1 {
     margin-top: 46px;
   }
 
@@ -1145,7 +1126,7 @@
     margin-right: 0;
   }
 
-  .u-section-1 .u-btn-2 {
+  .u-section-1{
     margin-top: 46px;
   }
 
@@ -1158,7 +1139,7 @@
     margin-right: 0;
   }
 
-  .u-section-1 .u-btn-3 {
+  .u-section-1 {
     margin-top: 46px;
   }
 
@@ -1171,7 +1152,7 @@
     margin-right: 0;
   }
 
-  .u-section-1 .u-btn-4 {
+  .u-section-1  {
     margin-top: 46px;
   }
 
@@ -1184,7 +1165,7 @@
     margin-right: 0;
   }
 
-  .u-section-1 .u-btn-5 {
+  .u-section-1 {
     margin-top: 46px;
   }
 
@@ -1197,7 +1178,7 @@
     margin-right: 0;
   }
 
-  .u-section-1 .u-btn-6 {
+  .u-section-1 {
     margin-top: 46px;
   }
 
@@ -1210,7 +1191,7 @@
     margin-right: 0;
   }
 
-  .u-section-1 .u-btn-7 {
+  .u-section-1 {
     margin-top: 46px;
   }
 
@@ -1223,7 +1204,7 @@
     margin-right: 0;
   }
 
-  .u-section-1 .u-btn-8 {
+  .u-section-1 {
     margin-top: 46px;
   }
 
@@ -1236,7 +1217,7 @@
     margin-right: 0;
   }
 
-  .u-section-1 .u-btn-9 {
+  .u-section-1{
     margin-top: 46px;
   }
 }
