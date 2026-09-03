@@ -64,12 +64,10 @@ const decrement = (item) => {
                 <h4 class="u-align-center u-text u-text-2">{{ item.name }}</h4>
                 <p class="u-align-center u-text u-text-3">{{ item.description }}</p>
 
-                <!-- Prix du plat -->
                 <div class="u-text-price">
                   <strong>{{ item.price.toFixed(2) }} fr.</strong>
                 </div>
 
-                <!-- Gestion de la quantité -->
                 <div class="quantity-selector">
                   <button @click="decrement(item)" class="qty-btn">-</button>
                   <span class="qty-display">{{ item.quantity }}</span>

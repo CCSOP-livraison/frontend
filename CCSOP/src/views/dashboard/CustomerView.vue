@@ -240,14 +240,10 @@ const restaurants = ref([
 
 .u-section-1 a {
   margin: 0 20px;
-  color: #ff5722; /* Exemple de couleur pour le lien, à adapter */
+  color: #ff5722;
   font-size: 0.9rem;
   text-decoration: underline;
 }
-
-/* =================
-   RESPONSIVE DESIGN
-   ================ */
 
 @media (max-width: 1199px) {
   .u-section-1 .u-text-1 {
