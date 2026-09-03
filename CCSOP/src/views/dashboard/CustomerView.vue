@@ -1,4 +1,92 @@
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+
+const restaurants = ref([
+  {
+    id: 1,
+    name: 'casa bianca',
+    description: 'Casa bianca, le buffet de pâtes de vos rêves',
+    image: '../../../public/images/photo-1473093295043-cdd812d0e601.jpeg',
+    imageWidth: '1280',
+    imageHeight: '854',
+    delay: '500',
+  },
+  {
+    id: 2,
+    name: 'burger gourmet',
+    description: '+ de 50 burgers différents sur notre carte.',
+    image: '../../../public/images/photo-1610440042657-612c34d95e9f.jpeg',
+    imageWidth: '853',
+    imageHeight: '1280',
+    delay: '500',
+  },
+  {
+    id: 3,
+    name: 'Crêperie bretonne',
+    description: 'Venez découvrir notre crêpe bretonne la spécialité de la maison.',
+    image: '../../../public/images/photo-1567620905732-2d1ec7ab7445.jpeg',
+    imageWidth: '1059',
+    imageHeight: '1280',
+    delay: '500',
+  },
+  {
+    id: 4,
+    name: "Veggi'fun",
+    description:
+      'venez découvrir nos merveilleuse salade et autre met, carte totalement végétarienne',
+    image: '../../../public/images/photo-1546069901-ba9599a7e63c.jpeg',
+    imageWidth: '1280',
+    imageHeight: '1280',
+    delay: '750',
+  },
+  {
+    id: 5,
+    name: 'Tourte-la',
+    description: 'venez découvrir la meilleur tourte du monde',
+    image: '../../../public/images/photo-1565299624946-b28f40a0ae38.jpeg',
+    imageWidth: '1059',
+    imageHeight: '1280',
+    delay: '750',
+  },
+  {
+    id: 6,
+    name: 'glace exotique',
+    description: 'Venez découvrir nos plus de 100 parfum de glaces différents',
+    image: '../../../public/images/photo-1497034825429-c343d7c6a68f.jpeg',
+    imageWidth: '853',
+    imageHeight: '1280',
+    delay: '750',
+  },
+  {
+    id: 7,
+    name: 'new kitchen 2',
+    description: 'Venez découvrir tout les plat classique revisité',
+    image:
+      'https://images.unsplash.com/photo-1559054663-e8d23213f55c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzgzNjl8MHwxfHNlYXJjaHw0Nnx8Zm9vZHxlbnwwfHx8fDE3ODcxMzExNTh8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    imageWidth: '853',
+    imageHeight: '1280',
+    delay: '1000',
+  },
+  {
+    id: 8,
+    name: 'brasserie chaudron',
+    description: 'Venez découvrir nos recette traditionnelle',
+    image: '../../../public/images/photo-1432139509613-5c4255815697.jpeg',
+    imageWidth: '848',
+    imageHeight: '1280',
+    delay: '1000',
+  },
+  {
+    id: 9,
+    name: 'souplette',
+    description: 'venez découvrir nos soupe et bouillons',
+    image: '../../../public/images/photo-1505253668822-42074d58a7c6.jpeg',
+    imageWidth: '853',
+    imageHeight: '1280',
+    delay: '1000',
+  },
+])
+</script>
 
 <template>
   <body
@@ -24,211 +112,36 @@
         <div class="u-expanded-width u-list u-list-1">
           <div class="u-repeater u-repeater-1">
             <div
-              class="u-align-center u-container-align-center u-container-align-center-md u-container-align-center-sm u-container-align-center-xs u-container-style u-list-item u-repeater-item u-shape-rectangle u-video-cover u-white u-list-item-1"
+              v-for="(restaurant, index) in restaurants"
+              :key="restaurant.id"
+              :class="[
+                'u-align-center u-container-align-center u-container-align-center-md u-container-align-center-sm u-container-align-center-xs u-container-style u-list-item u-repeater-item u-shape-rectangle u-video-cover u-white',
+                `u-list-item-${index + 1}`,
+              ]"
               data-animation-name="customAnimationIn"
               data-animation-duration="1500"
-              data-animation-delay="500"
+              :data-animation-delay="restaurant.delay"
             >
               <div
-                class="u-container-layout u-similar-container u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-1"
+                :class="[
+                  'u-container-layout u-similar-container u-valign-top-md u-valign-top-sm u-valign-top-xs',
+                  `u-container-layout-${index + 1}`,
+                ]"
               >
                 <img
                   alt=""
-                  class="u-expanded-width u-image u-image-default u-image-1"
-                  src="../../../public/images/photo-1473093295043-cdd812d0e601.jpeg"
-                  data-image-width="1280"
-                  data-image-height="854"
+                  :class="['u-expanded-width u-image u-image-default', `u-image-${index + 1}`]"
+                  :src="restaurant.image"
+                  :data-image-width="restaurant.imageWidth"
+                  :data-image-height="restaurant.imageHeight"
                 />
-                <h4 class="u-align-center u-text u-text-2">casa bianca</h4>
-                <p class="u-align-center u-text u-text-3">
-                  Casa bianca, le buffet de pâtes de vos rêves
+                <h4 :class="['u-align-center u-text', `u-text-${index * 2 + 2}`]">
+                  {{ restaurant.name }}
+                </h4>
+                <p :class="['u-align-center u-text', `u-text-${index * 2 + 3}`]">
+                  {{ restaurant.description }}
                 </p>
-                  <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
-              </div>
-            </div>
-            <div
-              class="u-align-center u-container-align-center u-container-align-center-md u-container-align-center-sm u-container-align-center-xs u-container-style u-list-item u-repeater-item u-shape-rectangle u-video-cover u-white u-list-item-2"
-              data-animation-name="customAnimationIn"
-              data-animation-duration="1500"
-              data-animation-delay="500"
-            >
-              <div
-                class="u-container-layout u-similar-container u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-2"
-              >
-                <img
-                  alt=""
-                  class="u-expanded-width u-image u-image-default u-image-2"
-                  src="../../../public/images/photo-1610440042657-612c34d95e9f.jpeg"
-                  data-image-width="853"
-                  data-image-height="1280"
-                />
-                <h4 class="u-align-center u-text u-text-4">burger gourmet</h4>
-                <p class="u-align-center u-text u-text-5">
-                  + de 50 burgers différents sur notre carte.&nbsp;
-                </p>
-                  <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
-              </div>
-            </div>
-            <div
-              class="u-align-center u-container-align-center u-container-align-center-md u-container-align-center-sm u-container-align-center-xs u-container-style u-list-item u-repeater-item u-shape-rectangle u-white u-list-item-3"
-              data-animation-name="customAnimationIn"
-              data-animation-duration="1500"
-              data-animation-delay="500"
-            >
-              <div
-                class="u-container-layout u-similar-container u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-3"
-              >
-                <img
-                  alt=""
-                  class="u-expanded-width u-image u-image-default u-image-3"
-                  src="../../../public/images/photo-1567620905732-2d1ec7ab7445.jpeg"
-                  data-image-width="1059"
-                  data-image-height="1280"
-                />
-                <h4 class="u-align-center u-text u-text-6">Crêperie bretonne</h4>
-                <p class="u-align-center u-text u-text-7">
-                  Venez découvrir notre crêpe bretonne la spécialité de la maison.
-                </p>
-                  <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
-              </div>
-            </div>
-            <div
-              class="u-align-center u-container-align-center u-container-align-center-md u-container-align-center-sm u-container-align-center-xs u-container-style u-list-item u-repeater-item u-shape-rectangle u-white u-list-item-4"
-              data-animation-name="customAnimationIn"
-              data-animation-duration="1500"
-              data-animation-delay="750"
-            >
-              <div
-                class="u-container-layout u-similar-container u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-4"
-              >
-                <img
-                  alt=""
-                  class="u-expanded-width u-image u-image-default u-image-4"
-                  src="../../../public/images/photo-1546069901-ba9599a7e63c.jpeg"
-                  data-image-width="1280"
-                  data-image-height="1280"
-                />
-                <h4 class="u-align-center u-text u-text-8">Veggi'fun</h4>
-                <p class="u-align-center u-text u-text-9">
-                  venez découvrir nos merveilleuse salade et autre met, carte totalement
-                  végétarienne
-                </p>
-                  <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
-              </div>
-            </div>
-            <div
-              class="u-align-center u-container-align-center u-container-align-center-md u-container-align-center-sm u-container-align-center-xs u-container-style u-list-item u-repeater-item u-shape-rectangle u-white u-list-item-5"
-              data-animation-name="customAnimationIn"
-              data-animation-duration="1500"
-              data-animation-delay="750"
-            >
-              <div
-                class="u-container-layout u-similar-container u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-5"
-              >
-                <img
-                  alt=""
-                  class="u-expanded-width u-image u-image-default u-image-5"
-                  src="../../../public/images/photo-1565299624946-b28f40a0ae38.jpeg"
-                  data-image-width="1059"
-                  data-image-height="1280"
-                />
-                <h4 class="u-align-center u-text u-text-10">Tourte-la</h4>
-                <p class="u-align-center u-text u-text-11">
-                  venez découvrir la meilleur tourte du monde
-                </p>
-                  <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
-              </div>
-            </div>
-            <div
-              class="u-align-center u-container-align-center u-container-align-center-md u-container-align-center-sm u-container-align-center-xs u-container-style u-list-item u-repeater-item u-shape-rectangle u-white u-list-item-6"
-              data-animation-name="customAnimationIn"
-              data-animation-duration="1500"
-              data-animation-delay="750"
-            >
-              <div
-                class="u-container-layout u-similar-container u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-6"
-              >
-                <img
-                  alt=""
-                  class="u-expanded-width u-image u-image-default u-image-6"
-                  src="../../../public/images/photo-1497034825429-c343d7c6a68f.jpeg"
-                  data-image-width="853"
-                  data-image-height="1280"
-                />
-                <h4 class="u-align-center u-text u-text-12">glace exotique</h4>
-                <p class="u-align-center u-text u-text-13">
-                  Venez découvrir nos plus de 100 parfum de glaces différents
-                </p>
-                  <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
-              </div>
-            </div>
-            <div
-              class="u-align-center u-container-align-center u-container-align-center-md u-container-align-center-sm u-container-align-center-xs u-container-style u-list-item u-repeater-item u-shape-rectangle u-white u-list-item-7"
-              data-animation-name="customAnimationIn"
-              data-animation-duration="1500"
-              data-animation-delay="1000"
-            >
-              <div
-                class="u-container-layout u-similar-container u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-7"
-              >
-                <img
-                  alt=""
-                  class="u-expanded-width u-image u-image-default u-image-7"
-                  src="https://images.unsplash.com/photo-1559054663-e8d23213f55c?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w1NzgzNjl8MHwxfHNlYXJjaHw0Nnx8Zm9vZHxlbnwwfHx8fDE3ODcxMzExNTh8MA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080"
-                  data-image-width="853"
-                  data-image-height="1280"
-                />
-                <h4 class="u-align-center u-text u-text-14">new kitchen 2</h4>
-                <p class="u-align-center u-text u-text-15">
-                  Venez découvrir tout les plat classique revisité
-                </p>
-                  <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
-              </div>
-            </div>
-            <div
-              class="u-align-center u-container-align-center u-container-align-center-md u-container-align-center-sm u-container-align-center-xs u-container-style u-list-item u-repeater-item u-shape-rectangle u-white u-list-item-8"
-              data-animation-name="customAnimationIn"
-              data-animation-duration="1500"
-              data-animation-delay="1000"
-            >
-              <div
-                class="u-container-layout u-similar-container u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-8"
-              >
-                <img
-                  alt=""
-                  class="u-expanded-width u-image u-image-default u-image-8"
-                  src="../../../public/images/photo-1432139509613-5c4255815697.jpeg"
-                  data-image-width="848"
-                  data-image-height="1280"
-                />
-                <h4 class="u-align-center u-text u-text-16">brasserie chaudron</h4>
-                <p class="u-align-center u-text u-text-17">
-                  Venez découvrir nos recette traditionnelle
-                </p>
-                  <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
-              </div>
-            </div>
-            <div
-              class="u-align-center u-container-align-center u-container-align-center-md u-container-align-center-sm u-container-align-center-xs u-container-style u-list-item u-repeater-item u-shape-rectangle u-white u-list-item-9"
-              data-animation-name="customAnimationIn"
-              data-animation-duration="1500"
-              data-animation-delay="1000"
-            >
-              <div
-                class="u-container-layout u-similar-container u-valign-top-md u-valign-top-sm u-valign-top-xs u-container-layout-9"
-              >
-                <img
-                  alt=""
-                  class="u-expanded-width u-image u-image-default u-image-9"
-                  src="../../../public/images/photo-1505253668822-42074d58a7c6.jpeg"
-                  data-image-width="853"
-                  data-image-height="1280"
-                />
-                <h4 class="u-align-center u-text u-text-18">souplette</h4>
-                <p class="u-align-center u-text u-text-19">
-                  venez découvrir nos soupe et bouillons
-                </p>
-                  <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
+                <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
               </div>
             </div>
           </div>
@@ -241,6 +154,17 @@
 <style scoped>
 .u-section-1 {
   background-image: none;
+  box-shadow: 5px 5px 30px 0 rgba(0, 0, 0, 0.2);
+  --animation-custom_in-translate_x: 0px;
+  --animation-custom_in-translate_y: 300px;
+  --animation-custom_in-opacity: 0;
+  --animation-custom_in-rotate: 0deg;
+  --animation-custom_in-scale: 1;
+  padding: 0 0 50px;
+  font-size: 1.625rem;
+  margin: 40px 30px 0;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .u-section-1 .u-sheet-1 {
@@ -259,8 +183,7 @@
 
 .u-section-1 .u-list-1 {
   grid-template-rows: repeat(1, auto);
-  margin-top: 66px;
-  margin-bottom: 60px;
+  margin: 66px 0 60px;
 }
 
 .u-section-1 .u-repeater-1 {
@@ -270,352 +193,61 @@
   grid-auto-columns: calc(33.3333% - 16px);
 }
 
-.u-section-1 .u-list-item-1 {
-  box-shadow: 5px 5px 30px 0 rgba(0, 0, 0, 0.2);
-  --animation-custom_in-translate_x: 0px;
-  --animation-custom_in-translate_y: 300px;
-  --animation-custom_in-opacity: 0;
-  --animation-custom_in-rotate: 0deg;
-  --animation-custom_in-scale: 1;
+/* Style de chaque carte individuelle */
+.u-section-1 .u-list-item {
+  background-color: #ffffff; /* Fond blanc global pour la carte */
+  border-radius: 8px; /* Optionnel : arrondit un peu les coins */
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Légère ombre propre à chaque item */
+  margin-bottom: 24px; /* Sépare bien les items entre eux */
 }
 
-.u-section-1 .u-container-layout-1 {
-  padding: 0 0 50px;
+.u-section-1 [class*='u-container-layout-'] {
+  padding: 20px 0 30px; /* Espace dans le bloc blanc sous l'image */
+  display: flex;
+  flex-direction: column;
+}
+
+/* L'image prend toute la largeur en haut */
+.u-section-1 [class*='u-image-'] {
+  width: 100%;
+  height: 278px;
+  object-fit: cover;
+  margin: 0;
 }
 
 .u-section-1 .u-image-1 {
-  height: 278px;
-  margin-top: -10px;
-  margin-bottom: 0;
   object-position: 100% 50%;
 }
 
-.u-section-1 .u-text-2 {
-  font-size: 1.625rem;
-  margin: 40px 30px 0;
-}
-
-.u-section-1 .u-text-3 {
-  margin: 11px 40px 0 20px;
-}
-
-.u-section-1 {
-  background-image: none;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  font-weight: 700;
-  margin: 19px auto 0;
-  padding: 0;
-}
-
-.u-section-1 .u-list-item-2 {
-  box-shadow: 5px 5px 30px 0 rgba(0, 0, 0, 0.2);
-  --animation-custom_in-translate_x: 0px;
-  --animation-custom_in-translate_y: 300px;
-  --animation-custom_in-opacity: 0;
-  --animation-custom_in-rotate: 0deg;
-  --animation-custom_in-scale: 1;
-}
-
-.u-section-1 .u-container-layout-2 {
-  padding: 0 0 50px;
-}
-
-.u-section-1 .u-image-2 {
-  height: 278px;
-  margin-top: -10px;
-  margin-bottom: 0;
-}
-
-.u-section-1 .u-text-4 {
-  font-size: 1.625rem;
-  margin: 40px 30px 0;
-}
-
-.u-section-1 .u-text-5 {
-  margin: 11px 40px 0 20px;
-}
-
-.u-section-1 {
-  background-image: none;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  font-weight: 700;
-  margin: 19px auto 0;
-  padding: 0;
-}
-
-.u-section-1 .u-list-item-3 {
-  background-image: none;
-  box-shadow: 5px 5px 30px 0 rgba(0, 0, 0, 0.2);
-  --animation-custom_in-translate_x: 0px;
-  --animation-custom_in-translate_y: 300px;
-  --animation-custom_in-opacity: 0;
-  --animation-custom_in-rotate: 0deg;
-  --animation-custom_in-scale: 1;
-}
-
-.u-section-1 .u-container-layout-3 {
-  padding: 0 0 50px;
-}
-
-.u-section-1 .u-image-3 {
-  height: 278px;
-  margin-top: -10px;
-  margin-bottom: 0;
-}
-
-.u-section-1 .u-text-6 {
-  font-weight: 700;
-  font-size: 1.625rem;
-  margin: 40px 30px 0;
-}
-
-.u-section-1 .u-text-7 {
-  margin: 11px 40px 0 20px;
-}
-
-.u-section-1  {
-  background-image: none;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  font-weight: 700;
-  margin: 19px auto 0;
-  padding: 0;
-}
-
-.u-section-1 .u-list-item-4 {
-  background-image: none;
-  box-shadow: 5px 5px 30px 0 rgba(0, 0, 0, 0.2);
-  --animation-custom_in-translate_x: 0px;
-  --animation-custom_in-translate_y: 300px;
-  --animation-custom_in-opacity: 0;
-  --animation-custom_in-rotate: 0deg;
-  --animation-custom_in-scale: 1;
-}
-
-.u-section-1 .u-container-layout-4 {
-  padding: 0 0 50px;
-}
-
-.u-section-1 .u-image-4 {
-  height: 278px;
-  margin-top: -10px;
-  margin-bottom: 0;
-}
-
-.u-section-1 .u-text-8 {
-  font-weight: 700;
-  font-size: 1.625rem;
-  margin: 40px 30px 0;
-}
-
-.u-section-1 .u-text-9 {
-  margin: 11px 40px 0 20px;
-}
-
-.u-section-1 {
-  background-image: none;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  font-weight: 700;
-  margin: 19px auto 0;
-  padding: 0;
-}
-
-.u-section-1 .u-list-item-5 {
-  background-image: none;
-  box-shadow: 5px 5px 30px 0 rgba(0, 0, 0, 0.2);
-  --animation-custom_in-translate_x: 0px;
-  --animation-custom_in-translate_y: 300px;
-  --animation-custom_in-opacity: 0;
-  --animation-custom_in-rotate: 0deg;
-  --animation-custom_in-scale: 1;
-}
-
-.u-section-1 .u-container-layout-5 {
-  padding: 0 0 50px;
-}
-
-.u-section-1 .u-image-5 {
-  height: 278px;
-  margin-top: -10px;
-  margin-bottom: 0;
-}
-
-.u-section-1 .u-text-10 {
-  font-weight: 700;
-  font-size: 1.625rem;
-  margin: 40px 30px 0;
-}
-
-.u-section-1 .u-text-11 {
-  margin: 11px 40px 0 20px;
-}
-
-.u-section-1 {
-  background-image: none;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  font-weight: 700;
-  margin: 19px auto 0;
-  padding: 0;
-}
-
-.u-section-1 .u-list-item-6 {
-  background-image: none;
-  box-shadow: 5px 5px 30px 0 rgba(0, 0, 0, 0.2);
-  --animation-custom_in-translate_x: 0px;
-  --animation-custom_in-translate_y: 300px;
-  --animation-custom_in-opacity: 0;
-  --animation-custom_in-rotate: 0deg;
-  --animation-custom_in-scale: 1;
-}
-
-.u-section-1 .u-container-layout-6 {
-  padding: 0 0 50px;
-}
-
-.u-section-1 .u-image-6 {
-  height: 278px;
-  margin-top: -10px;
-  margin-bottom: 0;
-}
-
-.u-section-1 .u-text-12 {
-  font-weight: 700;
-  font-size: 1.625rem;
-  margin: 40px 30px 0;
-}
-
-.u-section-1 .u-text-13 {
-  margin: 11px 40px 0 20px;
-}
-
-.u-section-1 {
-  background-image: none;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  font-weight: 700;
-  margin: 19px auto 0;
-  padding: 0;
-}
-
-.u-section-1 .u-list-item-7 {
-  background-image: none;
-  box-shadow: 5px 5px 30px 0 rgba(0, 0, 0, 0.2);
-  --animation-custom_in-translate_x: 0px;
-  --animation-custom_in-translate_y: 300px;
-  --animation-custom_in-opacity: 0;
-  --animation-custom_in-rotate: 0deg;
-  --animation-custom_in-scale: 1;
-}
-
-.u-section-1 .u-container-layout-7 {
-  padding: 0 0 50px;
-}
-
-.u-section-1 .u-image-7 {
-  height: 278px;
-  margin-top: -10px;
-  margin-bottom: 0;
-}
-
-.u-section-1 .u-text-14 {
-  font-size: 1.625rem;
-  margin: 40px 30px 0;
-}
-
-.u-section-1 .u-text-15 {
-  margin: 11px 40px 0 20px;
-}
-
-.u-section-1 {
-  background-image: none;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  font-weight: 700;
-  margin: 19px auto 0;
-  padding: 0;
-}
-
-.u-section-1 .u-list-item-8 {
-  background-image: none;
-  box-shadow: 5px 5px 30px 0 rgba(0, 0, 0, 0.2);
-  --animation-custom_in-translate_x: 0px;
-  --animation-custom_in-translate_y: 300px;
-  --animation-custom_in-opacity: 0;
-  --animation-custom_in-rotate: 0deg;
-  --animation-custom_in-scale: 1;
-}
-
-.u-section-1 .u-container-layout-8 {
-  padding: 0 0 50px;
-}
-
 .u-section-1 .u-image-8 {
-  height: 278px;
-  margin-top: -10px;
-  margin-bottom: 0;
   object-position: 50%;
 }
 
-.u-section-1 .u-text-16 {
+/* Textes positionnés dans le rectangle blanc en dessous */
+.u-section-1 h4 {
   font-weight: 700;
   font-size: 1.625rem;
-  margin: 40px 30px 0;
+  margin: 20px 20px 0;
+  color: #333;
 }
 
-.u-section-1 .u-text-17 {
-  margin: 11px 40px 0 20px;
+.u-section-1 p {
+  margin: 10px 20px 20px;
+  font-size: 1rem;
+  color: #666;
 }
 
-.u-section-1 {
-  background-image: none;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  font-weight: 700;
-  margin: 19px auto 0;
-  padding: 0;
+.u-section-1 a {
+  margin: 0 20px;
+  color: #ff5722; /* Exemple de couleur pour le lien, à adapter */
+  font-size: 0.9rem;
+  text-decoration: underline;
 }
 
-.u-section-1 .u-list-item-9 {
-  background-image: none;
-  box-shadow: 5px 5px 30px 0 rgba(0, 0, 0, 0.2);
-  --animation-custom_in-translate_x: 0px;
-  --animation-custom_in-translate_y: 300px;
-  --animation-custom_in-opacity: 0;
-  --animation-custom_in-rotate: 0deg;
-  --animation-custom_in-scale: 1;
-}
-
-.u-section-1 .u-container-layout-9 {
-  padding: 0 0 50px;
-}
-
-.u-section-1 .u-image-9 {
-  height: 278px;
-  margin-top: -10px;
-  margin-bottom: 0;
-}
-
-.u-section-1 .u-text-18 {
-  font-size: 1.625rem;
-  margin: 40px 30px 0;
-}
-
-.u-section-1 .u-text-19 {
-  margin: 11px 40px 0 20px;
-}
-
-.u-section-1 {
-  background-image: none;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  font-weight: 700;
-  margin: 19px auto 0;
-  padding: 0;
-}
+/* =================
+   RESPONSIVE DESIGN
+   ================ */
 
 @media (max-width: 1199px) {
   .u-section-1 .u-text-1 {
@@ -623,199 +255,14 @@
   }
 
   .u-section-1 .u-repeater-1 {
-    grid-template-columns: repeat(3, calc(33.333333333333336% - 16px));
+    grid-template-columns: repeat(3, calc(33.3333% - 16px));
     min-height: 1340px;
     grid-gap: 24px;
-    grid-auto-columns: calc(33.333333333333336% - 16px);
+    grid-auto-columns: calc(33.3333% - 16px);
   }
 
-  .u-section-1 .u-image-1 {
+  .u-section-1 [class*='u-image-'] {
     height: 229px;
-  }
-
-  .u-section-1 .u-text-2 {
-    width: auto;
-    margin-top: -229px;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-
-  .u-section-1 .u-text-3 {
-    margin-top: 183px;
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .u-section-1 {
-    margin-top: 40px;
-  }
-
-  .u-section-1 .u-image-2 {
-    height: 229px;
-  }
-
-  .u-section-1 .u-text-4 {
-    width: auto;
-    margin-top: -229px;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-
-  .u-section-1 .u-text-5 {
-    margin-top: 183px;
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  .u-section-1 {
-    margin-top: 40px;
-  }
-
-  .u-section-1 .u-image-3 {
-    height: 229px;
-  }
-
-  .u-section-1 .u-text-6 {
-    width: auto;
-    margin-top: -229px;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-
-  .u-section-1 .u-text-7 {
-    margin-top: 183px;
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  .u-section-1 {
-    margin-top: 40px;
-  }
-
-  .u-section-1 .u-image-4 {
-    height: 229px;
-  }
-
-  .u-section-1 .u-text-8 {
-    width: auto;
-    margin-top: -229px;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-
-  .u-section-1 .u-text-9 {
-    margin-top: 183px;
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  .u-section-1 {
-    margin-top: 40px;
-  }
-
-  .u-section-1 .u-image-5 {
-    height: 229px;
-  }
-
-  .u-section-1 .u-text-10 {
-    width: auto;
-    margin-top: -229px;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-
-  .u-section-1 .u-text-11 {
-    margin-top: 183px;
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  .u-section-1{
-    margin-top: 40px;
-  }
-
-  .u-section-1 .u-image-6 {
-    height: 229px;
-  }
-
-  .u-section-1 .u-text-12 {
-    width: auto;
-    margin-top: -229px;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-
-  .u-section-1 .u-text-13 {
-    margin-top: 183px;
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  .u-section-1 {
-    margin-top: 40px;
-  }
-
-  .u-section-1 .u-image-7 {
-    height: 229px;
-  }
-
-  .u-section-1 .u-text-14 {
-    width: auto;
-    margin-top: -229px;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-
-  .u-section-1 .u-text-15 {
-    margin-top: 183px;
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  .u-section-1  {
-    margin-top: 40px;
-  }
-
-  .u-section-1 .u-image-8 {
-    height: 229px;
-  }
-
-  .u-section-1 .u-text-16 {
-    width: auto;
-    margin-top: -229px;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-
-  .u-section-1 .u-text-17 {
-    margin-top: 183px;
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  .u-section-1 {
-    margin-top: 40px;
-  }
-
-  .u-section-1 .u-image-9 {
-    height: 229px;
-  }
-
-  .u-section-1 .u-text-18 {
-    width: auto;
-    margin-top: -229px;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-
-  .u-section-1 .u-text-19 {
-    margin-top: 183px;
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  .u-section-1 {
-    margin-top: 40px;
   }
 }
 
@@ -830,272 +277,19 @@
     grid-auto-columns: calc(50% - 12px);
   }
 
-  .u-section-1 .u-container-layout-1 {
-    padding-bottom: 30px;
-  }
-
-  .u-section-1 .u-image-1 {
+  .u-section-1 [class*='u-image-'] {
     height: 263px;
-  }
-
-  .u-section-1 .u-text-2 {
-    margin-top: 40px;
-  }
-
-  .u-section-1 .u-text-3 {
-    margin-top: -56px;
-  }
-
-  .u-section-1 .u-container-layout-2 {
-    padding-bottom: 30px;
-  }
-
-  .u-section-1 .u-image-2 {
-    height: 263px;
-  }
-
-  .u-section-1 .u-text-4 {
-    margin-top: 40px;
-  }
-
-  .u-section-1 .u-text-5 {
-    margin-top: -56px;
-  }
-
-  .u-section-1 .u-container-layout-3 {
-    padding-bottom: 30px;
-  }
-
-  .u-section-1 .u-image-3 {
-    height: 263px;
-  }
-
-  .u-section-1 .u-text-6 {
-    margin-top: 40px;
-  }
-
-  .u-section-1 .u-text-7 {
-    margin-top: -56px;
-  }
-
-  .u-section-1 .u-container-layout-4 {
-    padding-bottom: 30px;
-  }
-
-  .u-section-1 .u-image-4 {
-    height: 263px;
-  }
-
-  .u-section-1 .u-text-8 {
-    margin-top: 40px;
-  }
-
-  .u-section-1 .u-text-9 {
-    margin-top: -56px;
-  }
-
-  .u-section-1 .u-container-layout-5 {
-    padding-bottom: 30px;
-  }
-
-  .u-section-1 .u-image-5 {
-    height: 263px;
-  }
-
-  .u-section-1 .u-text-10 {
-    margin-top: 40px;
-  }
-
-  .u-section-1 .u-text-11 {
-    margin-top: -56px;
-  }
-
-  .u-section-1 .u-container-layout-6 {
-    padding-bottom: 30px;
-  }
-
-  .u-section-1 .u-image-6 {
-    height: 263px;
-  }
-
-  .u-section-1 .u-text-12 {
-    margin-top: 40px;
-  }
-
-  .u-section-1 .u-text-13 {
-    margin-top: -56px;
-  }
-
-  .u-section-1 .u-container-layout-7 {
-    padding-bottom: 30px;
-  }
-
-  .u-section-1 .u-image-7 {
-    height: 263px;
-  }
-
-  .u-section-1 .u-text-14 {
-    margin-top: 40px;
-  }
-
-  .u-section-1 .u-text-15 {
-    margin-top: -56px;
-  }
-
-  .u-section-1 .u-container-layout-8 {
-    padding-bottom: 30px;
-  }
-
-  .u-section-1 .u-image-8 {
-    height: 263px;
-  }
-
-  .u-section-1 .u-text-16 {
-    margin-top: 40px;
-  }
-
-  .u-section-1 .u-text-17 {
-    margin-top: -56px;
-  }
-
-  .u-section-1 .u-container-layout-9 {
-    padding-bottom: 30px;
-  }
-
-  .u-section-1 .u-image-9 {
-    height: 263px;
-  }
-
-  .u-section-1 .u-text-18 {
-    margin-top: 40px;
-  }
-
-  .u-section-1 .u-text-19 {
-    margin-top: -56px;
   }
 }
 
 @media (max-width: 767px) {
   .u-section-1 .u-repeater-1 {
     grid-template-columns: 100%;
-    grid-auto-columns: calc(100% - 0px);
+    grid-auto-columns: 100%;
   }
 
-  .u-section-1 .u-image-1 {
+  .u-section-1 [class*='u-image-'] {
     height: 395px;
-  }
-
-  .u-section-1 .u-text-2 {
-    margin-left: 30px;
-    margin-right: 30px;
-  }
-
-  .u-section-1 {
-    margin-top: 72px;
-  }
-
-  .u-section-1 .u-image-2 {
-    height: 395px;
-  }
-
-  .u-section-1 .u-text-4 {
-    margin-left: 30px;
-    margin-right: 30px;
-  }
-
-  .u-section-1 {
-    margin-top: 72px;
-  }
-
-  .u-section-1 .u-image-3 {
-    height: 395px;
-  }
-
-  .u-section-1 .u-text-6 {
-    margin-left: 30px;
-    margin-right: 30px;
-  }
-
-  .u-section-1 {
-    margin-top: 72px;
-  }
-
-  .u-section-1 .u-image-4 {
-    height: 395px;
-  }
-
-  .u-section-1 .u-text-8 {
-    margin-left: 30px;
-    margin-right: 30px;
-  }
-
-  .u-section-1 {
-    margin-top: 72px;
-  }
-
-  .u-section-1 .u-image-5 {
-    height: 395px;
-  }
-
-  .u-section-1 .u-text-10 {
-    margin-left: 30px;
-    margin-right: 30px;
-  }
-
-  .u-section-1 {
-    margin-top: 72px;
-  }
-
-  .u-section-1 .u-image-6 {
-    height: 395px;
-  }
-
-  .u-section-1 .u-text-12 {
-    margin-left: 30px;
-    margin-right: 30px;
-  }
-
-  .u-section-1 {
-    margin-top: 72px;
-  }
-
-  .u-section-1 .u-image-7 {
-    height: 395px;
-  }
-
-  .u-section-1 .u-text-14 {
-    margin-left: 30px;
-    margin-right: 30px;
-  }
-
-  .u-section-1 {
-    margin-top: 72px;
-  }
-
-  .u-section-1 .u-image-8 {
-    height: 395px;
-  }
-
-  .u-section-1 .u-text-16 {
-    margin-left: 30px;
-    margin-right: 30px;
-  }
-
-  .u-section-1 {
-    margin-top: 72px;
-  }
-
-  .u-section-1 .u-image-9 {
-    height: 395px;
-  }
-
-  .u-section-1 .u-text-18 {
-    margin-left: 30px;
-    margin-right: 30px;
-  }
-
-  .u-section-1 {
-    margin-top: 72px;
   }
 }
 
@@ -1104,121 +298,8 @@
     font-size: 2.34375rem;
   }
 
-  .u-section-1 .u-image-1 {
+  .u-section-1 [class*='u-image-'] {
     height: 249px;
-  }
-
-  .u-section-1 .u-text-2 {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .u-section-1 {
-    margin-top: 46px;
-  }
-
-  .u-section-1 .u-image-2 {
-    height: 249px;
-  }
-
-  .u-section-1 .u-text-4 {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .u-section-1{
-    margin-top: 46px;
-  }
-
-  .u-section-1 .u-image-3 {
-    height: 249px;
-  }
-
-  .u-section-1 .u-text-6 {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .u-section-1 {
-    margin-top: 46px;
-  }
-
-  .u-section-1 .u-image-4 {
-    height: 249px;
-  }
-
-  .u-section-1 .u-text-8 {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .u-section-1  {
-    margin-top: 46px;
-  }
-
-  .u-section-1 .u-image-5 {
-    height: 249px;
-  }
-
-  .u-section-1 .u-text-10 {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .u-section-1 {
-    margin-top: 46px;
-  }
-
-  .u-section-1 .u-image-6 {
-    height: 249px;
-  }
-
-  .u-section-1 .u-text-12 {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .u-section-1 {
-    margin-top: 46px;
-  }
-
-  .u-section-1 .u-image-7 {
-    height: 249px;
-  }
-
-  .u-section-1 .u-text-14 {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .u-section-1 {
-    margin-top: 46px;
-  }
-
-  .u-section-1 .u-image-8 {
-    height: 249px;
-  }
-
-  .u-section-1 .u-text-16 {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .u-section-1 {
-    margin-top: 46px;
-  }
-
-  .u-section-1 .u-image-9 {
-    height: 249px;
-  }
-
-  .u-section-1 .u-text-18 {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .u-section-1{
-    margin-top: 46px;
   }
 }
 </style>

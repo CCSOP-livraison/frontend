@@ -15,12 +15,6 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <link
-    id="u-page-google-font"
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?display=swap&amp;family=Roboto:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800"
-  />
-
   <body>
     <section class="u-clearfix u-section-1" id="block-1">
       <div class="u-clearfix u-sheet u-sheet-1">
@@ -35,7 +29,8 @@ const handleSubmit = () => {
               <label for="email-e981" class="u-label">Courriel</label>
               <input
                 v-model="email"
-                placeholder="Saisisez votre courriel"
+                type="email"
+                placeholder="Saisissez votre courriel"
                 class="u-input u-input-rectangle"
                 required=""
               />
@@ -45,7 +40,7 @@ const handleSubmit = () => {
               <input
                 v-model="password"
                 type="password"
-                placeholder="Saisiez votre mot de passe"
+                placeholder="Saisissez votre mot de passe"
                 class="u-input u-input-rectangle"
                 required=""
               />
@@ -71,7 +66,6 @@ const handleSubmit = () => {
               >
                 Se connecter
               </button>
-              <input type="submit" value="submit" class="u-form-control-hidden" />
             </div>
           </form>
           <p v-if="message" :style="{ color: isError ? 'red' : 'green' }">
@@ -82,7 +76,8 @@ const handleSubmit = () => {
     </section>
   </body>
 </template>
-<style>
+
+<style scoped>
 .u-section-1 .u-sheet-1 {
   min-height: 480px;
 }

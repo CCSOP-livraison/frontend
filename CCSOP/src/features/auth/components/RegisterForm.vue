@@ -3,11 +3,27 @@ import { ref } from 'vue'
 import { useAuthStore } from '../stores/useAuthStore'
 
 const authStore = useAuthStore()
+
+const firstname = ref('')
+const Name = ref('')
+const street = ref('')
+const city = ref('')
+const zipcode = ref('')
+const phone = ref('')
 const email = ref('')
 const password = ref('')
 
 const handleSubmit = () => {
-  authStore.register(email.value, password.value)
+  authStore.register({
+    firstname: firstname.value,
+    name: Name.value,
+    street: street.value,
+    city: city.value,
+    zipcode: zipcode.value,
+    phone: phone.value,
+    email: email.value,
+    password: password.value,
+  })
 }
 </script>
 
@@ -65,7 +81,7 @@ const handleSubmit = () => {
               <input
                 v-model="zipcode"
                 placeholder="Saisir votre code postal"
-                name="city"
+                name="zipcode"
                 class="u-input u-input-rectangle"
               />
             </div>
@@ -83,7 +99,8 @@ const handleSubmit = () => {
               <label for="email-e981" class="u-label">Mail</label>
               <input
                 v-model="email"
-                placeholder="Saisisez votre courriel"
+                type="email"
+                placeholder="Saisissez votre courriel"
                 class="u-input u-input-rectangle"
                 required=""
               />
@@ -93,7 +110,7 @@ const handleSubmit = () => {
               <input
                 v-model="password"
                 type="password"
-                placeholder="Saisiez votre mot de passe"
+                placeholder="Saisissez votre mot de passe"
                 class="u-input u-input-rectangle"
                 required=""
               />
@@ -111,11 +128,10 @@ const handleSubmit = () => {
                   font-size: 16px;
                   font-weight: bold;
                   cursor: pointer;
-              "
+                "
               >
                 S'enregistrer
               </button>
-              <input type="submit" value="submit" class="u-form-control-hidden" />
             </div>
           </form>
         </div>
@@ -123,7 +139,8 @@ const handleSubmit = () => {
     </section>
   </body>
 </template>
-<style>
+
+<style scoped>
 .u-section-1 .u-sheet-1 {
   min-height: 1107px;
 }
@@ -134,31 +151,12 @@ const handleSubmit = () => {
   margin: 162px auto 60px;
 }
 
-.u-section-1 .u-form-group-1 {
-  margin-left: 0;
-}
-
-.u-section-1 .u-form-group-2 {
-  margin-left: 0;
-}
-
-.u-section-1 .u-form-group-3 {
-  margin-left: 0;
-}
-
-.u-section-1 .u-form-group-4 {
-  margin-left: 0;
-}
-
-.u-section-1 .u-form-group-5 {
-  margin-left: 0;
-}
-
+.u-section-1 .u-form-group-1,
+.u-section-1 .u-form-group-2,
+.u-section-1 .u-form-group-3,
+.u-section-1 .u-form-group-4,
+.u-section-1 .u-form-group-5,
 .u-section-1 .u-form-group-6 {
-  margin-left: 0;
-}
-
-.u-section-1 {
   margin-left: 0;
 }
 

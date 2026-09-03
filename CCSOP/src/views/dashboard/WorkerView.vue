@@ -19,7 +19,7 @@
           data-animation-name="customAnimationIn"
           data-animation-duration="1500"
         >
-          Nos missions disponible
+          Nos missions disponibles
         </h2>
         <div class="u-expanded-width u-list u-list-1">
           <div class="u-repeater u-repeater-1">
