@@ -7,10 +7,10 @@ export const useAuthStore = defineStore('auth', () => {
   const message = ref('')
   const isError = ref(false)
   const isAuthenticated = ref(false)
-      async function login(username, password) {
+      async function login(email, password) {
         try {
           const response = await api.post('auth/login', {
-            email: username,
+            email: email,
             password: password
           })
           switch (response.data.roles[0].name) {
@@ -38,7 +38,38 @@ export const useAuthStore = defineStore('auth', () => {
           isAuthenticated.value = false
         }
       }
-  async function register(email, password) {
+  async function register(
+    firstname,
+    lastname,
+    address,
+    locate,
+    zipcode,
+    phoneNumber,
+    email,
+    password,
+  ) {
+    try {
+      const response = await api.post('auth/register', {
+        firstname: firstname,
+        lastname: lastname,
+        address: address,
+        locate: locate,
+        zipcode: zipcode,
+        phoneNumber: phoneNumber,
+        email: email,
+        password: password,
+      })
+
+      isError.value = false
+      isAuthenticated.value = true
+      message.value = 'Inscription réussie !'
+    } catch (err) {
+      console.error("Détail de l'erreur:", err)
+      message.value =
+        "Impossible d'envoyer votre message. Merci de corriger les erreurs et réessayer."
+      isError.value = true
+      isAuthenticated.value = false
+    }
   }
 
   return {

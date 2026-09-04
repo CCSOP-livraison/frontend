@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '../stores/useAuthStore'
+import router from '@/router'
 
 const authStore = useAuthStore()
 
@@ -14,16 +15,17 @@ const email = ref('')
 const password = ref('')
 
 const handleSubmit = () => {
-  authStore.register({
-    firstname: firstname.value,
-    name: Name.value,
-    street: street.value,
-    city: city.value,
-    zipcode: zipcode.value,
-    phone: phone.value,
-    email: email.value,
-    password: password.value,
-  })
+  authStore.register(
+    firstname.value,
+    Name.value,
+    street.value,
+    city.value,
+    zipcode.value,
+    phone.value,
+    email.value,
+    password.value,
+  )
+  router.push('/dashboard-customer')
 }
 </script>
 
