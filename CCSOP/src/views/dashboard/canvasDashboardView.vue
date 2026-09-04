@@ -1,8 +1,7 @@
-<script setup>
-</script>
+<script setup></script>
 
 <template>
-  <div
+  <body
     data-path-to-root="../"
     data-include-products="false"
     class="u-body u-clearfix u-xl-mode"
@@ -20,15 +19,48 @@
           data-animation-name="customAnimationIn"
           data-animation-duration="1500"
         >
-          Bienvenue sur notre plateforme
+          Nos restaurants partenaire
         </h2>
         <div class="u-expanded-width u-list u-list-1">
           <div class="u-repeater u-repeater-1">
+            <div
+              v-for="(restaurant, index) in restaurants"
+              :key="restaurant.id"
+              :class="[
+                'u-align-center u-container-align-center u-container-align-center-md u-container-align-center-sm u-container-align-center-xs u-container-style u-list-item u-repeater-item u-shape-rectangle u-video-cover u-white',
+                `u-list-item-${index + 1}`,
+              ]"
+              data-animation-name="customAnimationIn"
+              data-animation-duration="1500"
+              :data-animation-delay="restaurant.delay"
+            >
+              <div
+                :class="[
+                  'u-container-layout u-similar-container u-valign-top-md u-valign-top-sm u-valign-top-xs',
+                  `u-container-layout-${index + 1}`,
+                ]"
+              >
+                <img
+                  alt=""
+                  :class="['u-expanded-width u-image u-image-default', `u-image-${index + 1}`]"
+                  :src="restaurant.image"
+                  :data-image-width="restaurant.imageWidth"
+                  :data-image-height="restaurant.imageHeight"
+                />
+                <h4 :class="['u-align-center u-text', `u-text-${index * 2 + 2}`]">
+                  {{ restaurant.name }}
+                </h4>
+                <p :class="['u-align-center u-text', `u-text-${index * 2 + 3}`]">
+                  {{ restaurant.description }}
+                </p>
+                <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
-  </div>
+  </body>
 </template>
 
 <style scoped>
@@ -73,20 +105,22 @@
   grid-auto-columns: calc(33.3333% - 16px);
 }
 
+/* Style de chaque carte individuelle */
 .u-section-1 .u-list-item {
-  background-color: #ffffff;
-  border-radius: 8px;
+  background-color: #ffffff; /* Fond blanc global pour la carte */
+  border-radius: 8px; /* Optionnel : arrondit un peu les coins */
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  margin-bottom: 24px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Légère ombre propre à chaque item */
+  margin-bottom: 24px; /* Sépare bien les items entre eux */
 }
 
 .u-section-1 [class*='u-container-layout-'] {
-  padding: 20px 0 30px;
+  padding: 20px 0 30px; /* Espace dans le bloc blanc sous l'image */
   display: flex;
   flex-direction: column;
 }
 
+/* L'image prend toute la largeur en haut */
 .u-section-1 [class*='u-image-'] {
   width: 100%;
   height: 278px;
@@ -102,6 +136,7 @@
   object-position: 50%;
 }
 
+/* Textes positionnés dans le rectangle blanc en dessous */
 .u-section-1 h4 {
   font-weight: 700;
   font-size: 1.625rem;
