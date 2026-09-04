@@ -48,16 +48,18 @@ const handleSubmit = () => {
                 name="name-1"
                 class="u-input u-input-rectangle"
                 required=""
+                maxlength="105"
               />
             </div>
             <div class="u-form-group u-form-name u-form-partition-factor-2 u-form-group-2">
               <label for="last-name-85b7" class="u-label">Nom</label>
               <input
-                v-model="Name"
+                v-model="name"
                 placeholder="Saisir votre Nom"
                 name="name"
                 class="u-input u-input-rectangle"
                 required=""
+                maxlength="50"
               />
             </div>
             <div class="u-form-group u-form-group-3">
@@ -67,6 +69,8 @@ const handleSubmit = () => {
                 placeholder="Saisir votre rue"
                 name="street"
                 class="u-input u-input-rectangle"
+                required=""
+                maxlength="45"
               />
             </div>
             <div class="u-form-group u-form-partition-factor-2 u-form-group-4">
@@ -76,6 +80,8 @@ const handleSubmit = () => {
                 placeholder="Saisir votre ville"
                 name="city"
                 class="u-input u-input-rectangle"
+                required=""
+                maxlength="18"
               />
             </div>
             <div class="u-form-group u-form-partition-factor-2 u-form-group-5">
@@ -85,6 +91,8 @@ const handleSubmit = () => {
                 placeholder="Saisir votre code postal"
                 name="zipcode"
                 class="u-input u-input-rectangle"
+                required=""
+                maxlength="4"
               />
             </div>
             <div class="u-form-group u-form-phone u-form-group-6">
@@ -95,6 +103,8 @@ const handleSubmit = () => {
                 name="phone"
                 class="u-input u-input-rectangle"
                 required=""
+                type="tel"
+                maxlength="16"
               />
             </div>
             <div class="u-form-email u-form-group">
@@ -105,6 +115,7 @@ const handleSubmit = () => {
                 placeholder="Saisissez votre courriel"
                 class="u-input u-input-rectangle"
                 required=""
+                maxlength="320"
               />
             </div>
             <div class="u-form-group u-form-name">
@@ -115,6 +126,7 @@ const handleSubmit = () => {
                 placeholder="Saisissez votre mot de passe"
                 class="u-input u-input-rectangle"
                 required=""
+                maxlength="100"
               />
             </div>
             <div class="u-align-left u-form-group u-form-submit">
