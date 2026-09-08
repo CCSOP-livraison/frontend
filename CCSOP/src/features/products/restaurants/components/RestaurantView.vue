@@ -4,10 +4,15 @@ import { useRestaurantStore } from '@/features/products/restaurants/stores/useRe
 import { useRoute } from 'vue-router'
 const restaurantStore = useRestaurantStore()
 const route = useRoute()
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const idRestaurant = route.params.id
 onMounted(async () => {
   await restaurantStore.getRestaurant(idRestaurant)
 })
+const goToMenu = () => {
+  router.push(`/menu/${idRestaurant}`)
+}
 </script>
 
 <template>
@@ -21,18 +26,14 @@ onMounted(async () => {
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-restaurant-layout">
           <div class="u-column-left">
-             <img
+            <img
               class="u-expanded-width-xs u-image u-image-default u-image-1"
               :src="restaurantStore.restaurant.picture"
               alt=""
             />
             <p class="u-text u-text-4">{{ restaurantStore.restaurant.summary }}</p>
             <div class="u-btn-container">
-              <RouterLink
-                class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius u-btn-2"
-                to="/menu"
-                >voir la carte</RouterLink
-              >
+              <p class="dark:bg-blue-800" @click="goToMenu()">voir la carte</p>
             </div>
           </div>
 

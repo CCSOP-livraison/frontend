@@ -1,25 +1,20 @@
 <script setup>
-import { ref, computed } from 'vue'
-const cartItems = ref([
-  {
-    id: 1,
-    name: 'Pâtes Carbonara Traditionnelles',
-    price: 14.5,
-    quantity: 2,
-  },
-  {
-    id: 4,
-    name: 'Tiramisu Classique',
-    price: 7.0,
-    quantity: 1,
-  },
-])
+import { ref, computed, onMounted } from 'vue'
+import { useRestaurantStore } from '@/features/products/restaurants/stores/useRestaurantStore'
+import { useRoute } from 'vue-router'
+const restaurantStore = useRestaurantStore()
+const route = useRoute()
+const idRestaurant = route.params.id
+onMounted(async () => {
+  await restaurantStore.getMenu(idRestaurant)
+})
+
 const increment = (item) => {
   item.quantity++
 }
 
 const decrement = (item) => {
-  if (item.quantity > 1) {
+  if (item.quantity > 0) {
     item.quantity--
   } else {
     removeItem(item.id)
@@ -27,11 +22,11 @@ const decrement = (item) => {
 }
 
 const removeItem = (id) => {
-  cartItems.value = cartItems.value.filter((item) => item.id !== id)
+  restaurantStore.menu.value = restaurantStore.menu.filter((item) => item.id !== id)
 }
 
 const subtotal = computed(() => {
-  return cartItems.value.reduce((acc, item) => acc + item.price * item.quantity, 0)
+  return restaurantStore.menu.reduce((acc, item) => acc + item.price * item.quantity, 0)
 })
 
 const taxRate = 0.1
@@ -57,28 +52,42 @@ const finalPrice = computed(() => {
       <div class="u-clearfix u-sheet u-sheet-1">
         <h2 class="u-align-center u-text u-text-default u-text-1">Votre Panier</h2>
 
-        <div v-if="cartItems.length === 0" class="empty-cart">
+        <div v-if="restaurantStore.menu.length === 0" class="empty-cart">
           <p>Votre panier est actuellement vide.</p>
         </div>
 
         <div v-else class="cart-container">
           <div class="cart-items-list">
-            <div v-for="item in cartItems" :key="item.id" class="cart-item-card">
+            <div v-for="item in restaurantStore.menu" :key="item.id" class="cart-item-card">
               <div class="item-info">
-                <h4 class="u-text-2">{{ item.name }}</h4>
-                <p class="u-text-3">Prix unitaire : {{ item.price.toFixed(2) }} CHF</p>
+                <h4 class="u-text-2 u-align-left">{{ item.name }}</h4>
+                <p class="u-text-3 u-align-left">description : {{ item.description }}</p>
               </div>
 
-              <div class="item-actions">
-                <div class="quantity-selector">
-                  <button @click="decrement(item)" class="qty-btn">-</button>
-                  <span class="qty-display">{{ item.quantity }}</span>
-                  <button @click="increment(item)" class="qty-btn">+</button>
+              <div class="item-actions-grid">
+                <!-- Colonne Prix Unitaire -->
+                <div class="price-col">
+                  <span class="price-label">Prix unitaire</span>
+                  <span class="value">{{ item.price.toFixed(2) }} CHF</span>
                 </div>
-                <span class="item-total">
-                  <strong>{{ (item.price * item.quantity).toFixed(2) }} CHF</strong>
-                </span>
-                <button @click="removeItem(item.id)" class="remove-btn" title="Supprimer">×</button>
+
+                <!-- Colonne Quantité -->
+                <div class="quantity-col">
+                  <span class="price-label">Quantité</span>
+                  <div class="quantity-selector">
+                    <button @click="decrement(item)" class="qty-btn">-</button>
+                    <span class="qty-display">{{ item.quantity }}</span>
+                    <button @click="increment(item)" class="qty-btn">+</button>
+                  </div>
+                </div>
+
+                <!-- Colonne Prix Total -->
+                <div class="price-col total-col">
+                  <span class="price-label">Prix total</span>
+                  <span class="value"
+                    ><strong>{{ (item.price * item.quantity).toFixed(2) }} CHF</strong></span
+                  >
+                </div>
               </div>
             </div>
           </div>
@@ -112,6 +121,94 @@ const finalPrice = computed(() => {
 </template>
 
 <style scoped>
+/* Transformation de la zone d'actions en grille alignée */
+.item-actions-grid {
+  display: grid;
+  grid-template-columns: 120px 140px 120px; /* Largeurs fixes pour aligner chaque colonne verticalement */
+  gap: 20px;
+  align-items: center;
+}
+
+/* Style de chaque colonne de prix/quantité */
+.price-col,
+.quantity-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Aligne les chiffres à droite pour un rendu propre */
+}
+
+.price-label {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  text-align: right;
+}
+
+.quantity-col {
+  align-items: center; /* Centre les boutons de quantité dans leur colonne */
+}
+
+.quantity-col .price-label {
+  text-align: center;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qty-btn {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  width: 25px;
+  height: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.qty-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.qty-display {
+  font-size: 1rem;
+  font-weight: 600;
+  min-width: 20px;
+  text-align: center;
+}
+
+.value {
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+/* Adaptation pour les écrans mobiles */
+@media (max-width: 767px) {
+  .cart-item-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .item-actions-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .price-col,
+  .quantity-col {
+    align-items: flex-start;
+  }
+
+  .price-label,
+  .quantity-col .price-label {
+    text-align: left;
+  }
+}
 .u-section-1 {
   background-image: none;
   padding: 40px 0;
@@ -181,6 +278,20 @@ const finalPrice = computed(() => {
   gap: 20px;
 }
 
+/* Styles pour les colonnes de prix avec labels */
+.price-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.price-label {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 .quantity-selector {
   display: flex;
   align-items: center;
@@ -210,20 +321,6 @@ const finalPrice = computed(() => {
   font-size: 1.1rem;
   color: #2c3e50;
   min-width: 70px;
-  text-align: right;
-}
-
-.remove-btn {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: #ff5722;
-  cursor: pointer;
-  padding: 0 5px;
-}
-
-.remove-btn:hover {
-  color: #e64a19;
 }
 
 .cart-summary-box {

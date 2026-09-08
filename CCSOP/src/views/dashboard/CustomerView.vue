@@ -9,7 +9,7 @@ onMounted(async () => {
   await restaurantStore.getRestaurants()
 })
 const goToRestaurant = (id) => {
-  router.push(`/dashboard-customer/${id}`)
+  router.push(`/restaurant/${id}`)
 }
 </script>
 
