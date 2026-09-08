@@ -38,7 +38,6 @@ const restaurant = ref({
     <section class="u-clearfix u-grey-80 u-section-1" id="block-3">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-restaurant-layout">
-
           <div class="u-column-left">
             <img
               class="u-expanded-width-xs u-image u-image-default u-image-1"
@@ -61,7 +60,6 @@ const restaurant = ref({
               >
             </div>
           </div>
-
 
           <div class="u-column-right">
             <h1 class="u-text u-text-1">{{ restaurant.name }}</h1>
@@ -136,7 +134,6 @@ const restaurant = ref({
   padding: 9px 34px 11px 33px;
   margin: 0;
 }
-
 
 @media (max-width: 991px) {
   .u-section-1 .u-restaurant-layout {

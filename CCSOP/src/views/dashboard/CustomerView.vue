@@ -1,91 +1,10 @@
 <script setup>
-import { ref } from 'vue'
-
-const restaurants = ref([
-  {
-    id: 1,
-    name: 'casa bianca',
-    description: 'Casa bianca, le buffet de pâtes de vos rêves',
-    image: '../../../public/images/photo-1473093295043-cdd812d0e601.jpeg',
-    imageWidth: '1280',
-    imageHeight: '854',
-    delay: '500',
-  },
-  {
-    id: 2,
-    name: 'burger gourmet',
-    description: '+ de 50 burgers différents sur notre carte.',
-    image: '../../../public/images/photo-1610440042657-612c34d95e9f.jpeg',
-    imageWidth: '853',
-    imageHeight: '1280',
-    delay: '500',
-  },
-  {
-    id: 3,
-    name: 'Crêperie bretonne',
-    description: 'Venez découvrir notre crêpe bretonne la spécialité de la maison.',
-    image: '../../../public/images/photo-1567620905732-2d1ec7ab7445.jpeg',
-    imageWidth: '1059',
-    imageHeight: '1280',
-    delay: '500',
-  },
-  {
-    id: 4,
-    name: "Veggi'fun",
-    description:
-      'venez découvrir nos merveilleuse salade et autre met, carte totalement végétarienne',
-    image: '../../../public/images/photo-1546069901-ba9599a7e63c.jpeg',
-    imageWidth: '1280',
-    imageHeight: '1280',
-    delay: '750',
-  },
-  {
-    id: 5,
-    name: 'Tourte-la',
-    description: 'venez découvrir la meilleur tourte du monde',
-    image: '../../../public/images/photo-1565299624946-b28f40a0ae38.jpeg',
-    imageWidth: '1059',
-    imageHeight: '1280',
-    delay: '750',
-  },
-  {
-    id: 6,
-    name: 'glace exotique',
-    description: 'Venez découvrir nos plus de 100 parfum de glaces différents',
-    image: '../../../public/images/photo-1497034825429-c343d7c6a68f.jpeg',
-    imageWidth: '853',
-    imageHeight: '1280',
-    delay: '750',
-  },
-  {
-    id: 7,
-    name: 'new kitchen 2',
-    description: 'Venez découvrir tout les plat classique revisité',
-    image:
-      'https://images.unsplash.com/photo-1559054663-e8d23213f55c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NzgzNjl8MHwxfHNlYXJjaHw0Nnx8Zm9vZHxlbnwwfHx8fDE3ODcxMzExNTh8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    imageWidth: '853',
-    imageHeight: '1280',
-    delay: '1000',
-  },
-  {
-    id: 8,
-    name: 'brasserie chaudron',
-    description: 'Venez découvrir nos recette traditionnelle',
-    image: '../../../public/images/photo-1432139509613-5c4255815697.jpeg',
-    imageWidth: '848',
-    imageHeight: '1280',
-    delay: '1000',
-  },
-  {
-    id: 9,
-    name: 'souplette',
-    description: 'venez découvrir nos soupe et bouillons',
-    image: '../../../public/images/photo-1505253668822-42074d58a7c6.jpeg',
-    imageWidth: '853',
-    imageHeight: '1280',
-    delay: '1000',
-  },
-])
+import { onMounted, ref } from 'vue'
+import { useRestaurantStore } from '@/features/products/restaurants/stores/useRestaurantStore'
+const restaurantStore = useRestaurantStore()
+onMounted(async () => {
+  await restaurantStore.getRestaurants();
+})
 </script>
 
 <template>
@@ -112,7 +31,7 @@ const restaurants = ref([
         <div class="u-expanded-width u-list u-list-1">
           <div class="u-repeater u-repeater-1">
             <div
-              v-for="(restaurant, index) in restaurants"
+              v-for="(restaurant, index) in restaurantStore.restaurants"
               :key="restaurant.id"
               :class="[
                 'u-align-center u-container-align-center u-container-align-center-md u-container-align-center-sm u-container-align-center-xs u-container-style u-list-item u-repeater-item u-shape-rectangle u-video-cover u-white',
@@ -131,9 +50,7 @@ const restaurants = ref([
                 <img
                   alt=""
                   :class="['u-expanded-width u-image u-image-default', `u-image-${index + 1}`]"
-                  :src="restaurant.image"
-                  :data-image-width="restaurant.imageWidth"
-                  :data-image-height="restaurant.imageHeight"
+                  :src="restaurant.picture"
                 />
                 <h4 :class="['u-align-center u-text', `u-text-${index * 2 + 2}`]">
                   {{ restaurant.name }}
