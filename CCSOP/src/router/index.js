@@ -40,8 +40,8 @@ const router = createRouter({
       component: () => import('@/views/dashboard/WorkerView.vue'),
     },
     {
-      path: '/dashboard-restaurant',
-      name: 'dashboard-restaurant',
+      path: '/dashboard-customer/:id',
+      name: 'dashboard-customer/:id',
       component: () => import('@/features/products/restaurants/components/RestaurantView.vue'),
     },
     {

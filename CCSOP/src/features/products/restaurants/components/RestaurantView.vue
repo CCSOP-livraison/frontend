@@ -1,30 +1,12 @@
 <script setup>
-import { ref } from 'vue'
-
-const restaurant = ref({
-  id: 1,
-  name: 'casa bianca',
-  description:
-    ' Lorem Ipsum&nbsp;is simply dummy text of the printing and typesetting industry. Lorem\n' +
-    "          Ipsum has been the industry's standard dummy text ever since 1966, when designers at\n" +
-    '          Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a\n' +
-    "          1914 Cicero translation and scrambled it to make dummy text for Letraset's Body Type\n" +
-    '          sheets. It has survived not only many decades, but also the leap into electronic\n' +
-    '          typesetting, remaining essentially unchanged. It was popularised thanks to these sheets\n' +
-    '          and more recently with desktop publishing software like Aldus PageMaker and Microsoft Word\n' +
-    '          including versions of Lorem Ipsum.Lorem Ipsum&nbsp;is simply dummy text of the printing\n' +
-    "          and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever\n" +
-    '          since 1966, when designers at Letraset and James Mosley, the librarian at St Bride\n' +
-    '          Printing Library in London, took a 1914 Cicero translation and scrambled it to make dummy\n' +
-    "          text for Letraset's Body Type sheets. It has survived not only many decades, but also the\n" +
-    '          leap into electronic typesetting, remaining essentially unchanged. It was popularised\n' +
-    '          thanks to these sheets and more recently with desktop publishing software like Aldus\n' +
-    '          PageMaker and Microsoft Word including versions of Lorem Ipsum.',
-  resume: 'Casa bianca, le buffet de pâtes de vos rêves',
-  image: '../../../public/images/photo-1473093295043-cdd812d0e601.jpeg',
-  imageWidth: '1280',
-  imageHeight: '854',
-  delay: '500',
+import { onMounted, ref } from 'vue'
+import { useRestaurantStore } from '@/features/products/restaurants/stores/useRestaurantStore'
+import { useRoute } from 'vue-router'
+const restaurantStore = useRestaurantStore()
+const route = useRoute()
+const idRestaurant = route.params.id
+onMounted(async () => {
+  await restaurantStore.getRestaurant(idRestaurant)
 })
 </script>
 
@@ -39,20 +21,13 @@ const restaurant = ref({
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-restaurant-layout">
           <div class="u-column-left">
-            <img
+             <img
               class="u-expanded-width-xs u-image u-image-default u-image-1"
-              :src="restaurant.image"
+              :src="restaurantStore.restaurant.picture"
               alt=""
-              :data-image-width="restaurant.imageWidth"
-              :data-image-height="restaurant.imageHeight"
             />
-            <p class="u-text u-text-4">{{ restaurant.resume }}</p>
+            <p class="u-text u-text-4">{{ restaurantStore.restaurant.summary }}</p>
             <div class="u-btn-container">
-              <a
-                href="#"
-                class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius u-btn-1"
-                >modifier la carte</a
-              >
               <RouterLink
                 class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius u-btn-2"
                 to="/menu"
@@ -62,8 +37,8 @@ const restaurant = ref({
           </div>
 
           <div class="u-column-right">
-            <h1 class="u-text u-text-1">{{ restaurant.name }}</h1>
-            <p class="u-text u-text-3">{{ restaurant.description }}</p>
+            <h1 class="u-text u-text-1">{{ restaurantStore.restaurant.name }}</h1>
+            <p class="u-text u-text-3">{{ restaurantStore.restaurant.description }}</p>
           </div>
         </div>
       </div>

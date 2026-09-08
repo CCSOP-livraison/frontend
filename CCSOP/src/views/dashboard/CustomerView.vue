@@ -1,10 +1,16 @@
-<script setup>
+<script setup xmlns="http://www.w3.org/1999/html">
 import { onMounted, ref } from 'vue'
 import { useRestaurantStore } from '@/features/products/restaurants/stores/useRestaurantStore'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 const restaurantStore = useRestaurantStore()
 onMounted(async () => {
-  await restaurantStore.getRestaurants();
+  await restaurantStore.getRestaurants()
 })
+const goToRestaurant = (id) => {
+  router.push(`/dashboard-customer/${id}`)
+}
 </script>
 
 <template>
@@ -58,7 +64,7 @@ onMounted(async () => {
                 <p :class="['u-align-center u-text', `u-text-${index * 2 + 3}`]">
                   {{ restaurant.description }}
                 </p>
-                <RouterLink to="/dashboard-restaurant">Apprendre encore plus</RouterLink>
+                <button @click="goToRestaurant(restaurant.id)">Apprendre encore plus</button>
               </div>
             </div>
           </div>
