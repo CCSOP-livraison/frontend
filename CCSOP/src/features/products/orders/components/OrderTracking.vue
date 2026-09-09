@@ -57,7 +57,6 @@
         <div class="card" v-if="order.deliveryPerson">
           <h3>🛵 Votre livreur</h3>
           <div class="delivery-person">
-            <img :src="order.deliveryPerson.avatar" alt="Livreur" class="avatar" />
             <div>
               <p>
                 <strong>{{ order.deliveryPerson.name }}</strong>
@@ -159,7 +158,7 @@ const callDriver = () => {
 </script>
 
 <style scoped>
-.conteneur-btn{
+.conteneur-btn {
   text-align: center;
 }
 button {
