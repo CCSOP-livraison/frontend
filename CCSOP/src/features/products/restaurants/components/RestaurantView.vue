@@ -40,6 +40,16 @@ const goToMenu = () => {
                 Voir la carte
               </button>
             </div>
+            <div class="restaurant-card">
+              <h2>Adresse</h2>
+              <address class="restaurant-address">
+                <span class="street">{{ restaurantStore.restaurant.address }}</span>
+                <span class="city-line">
+                  <span class="zipcode">{{ restaurantStore.restaurant.zipcode }}</span>
+                  <span class="locality">{{ restaurantStore.restaurant.locate }}</span>
+                </span>
+              </address>
+            </div>
           </div>
 
           <div class="u-column-right">
@@ -53,6 +63,30 @@ const goToMenu = () => {
 </template>
 
 <style scoped>
+.locality{
+  padding: 2%;
+}
+.restaurant-card h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #4694e3;
+  font-size: 1.25rem;
+}
+
+.restaurant-address {
+  font-style: normal;
+  line-height: 1.5;
+  color: #ffffff;
+}
+
+.street {
+  display: block;
+}
+
+.city-line {
+  display: block;
+  font-weight: 500;
+}
 button {
   background-color: #4694e3;
   color: #ffffff;
