@@ -1,16 +1,12 @@
 <script setup xmlns="http://www.w3.org/1999/html">
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import { useRestaurantStore } from '@/features/products/restaurants/stores/useRestaurantStore'
-import { useRouter } from 'vue-router'
-const router = useRouter()
+import { RouterLink } from 'vue-router'
 
 const restaurantStore = useRestaurantStore()
 onMounted(async () => {
   await restaurantStore.getRestaurants()
 })
-const goToRestaurant = (id) => {
-  router.push(`/restaurant/${id}`)
-}
 </script>
 
 <template>
@@ -32,7 +28,7 @@ const goToRestaurant = (id) => {
           data-animation-name="customAnimationIn"
           data-animation-duration="1500"
         >
-          Nos restaurants partenaire
+          Nos restaurants partenaires
         </h2>
         <div class="u-expanded-width u-list u-list-1">
           <div class="u-repeater u-repeater-1">
@@ -45,7 +41,7 @@ const goToRestaurant = (id) => {
               ]"
               data-animation-name="customAnimationIn"
               data-animation-duration="1500"
-              :data-animation-delay="restaurant.delay"
+              data-animation-delay="500"
             >
               <div
                 :class="[
@@ -62,9 +58,11 @@ const goToRestaurant = (id) => {
                   {{ restaurant.name }}
                 </h4>
                 <p :class="['u-align-center u-text', `u-text-${index * 2 + 3}`]">
-                  {{ restaurant.description }}
+                  {{ restaurant.summary }}
                 </p>
-                <button @click="goToRestaurant(restaurant.id)">Apprendre encore plus</button>
+                <RouterLink :to="`/restaurant/${restaurant.id}`" class="restaurant-link">
+                  En savoir plus
+                </RouterLink>
               </div>
             </div>
           </div>
@@ -116,56 +114,74 @@ const goToRestaurant = (id) => {
   grid-auto-columns: calc(33.3333% - 16px);
 }
 
-/* Style de chaque carte individuelle */
 .u-section-1 .u-list-item {
-  background-color: #ffffff; /* Fond blanc global pour la carte */
-  border-radius: 8px; /* Optionnel : arrondit un peu les coins */
+  background-color: #ffffff;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Légère ombre propre à chaque item */
-  margin-bottom: 24px; /* Sépare bien les items entre eux */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+  height: 450px;
 }
 
 .u-section-1 [class*='u-container-layout-'] {
-  padding: 20px 0 30px; /* Espace dans le bloc blanc sous l'image */
+  padding: 0 0 20px;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  align-items: center;
 }
 
-/* L'image prend toute la largeur en haut */
+
 .u-section-1 [class*='u-image-'] {
   width: 100%;
-  height: 278px;
+  height: 220px;
   object-fit: cover;
   margin: 0;
 }
 
-.u-section-1 .u-image-1 {
+.u-section-1 {
   object-position: 100% 50%;
 }
 
-.u-section-1 .u-image-8 {
+.u-section-1 {
   object-position: 50%;
 }
 
-/* Textes positionnés dans le rectangle blanc en dessous */
 .u-section-1 h4 {
   font-weight: 700;
-  font-size: 1.625rem;
-  margin: 20px 20px 0;
+  font-size: 1.4rem;
+  margin: 15px 20px 0;
   color: #333;
 }
 
 .u-section-1 p {
-  margin: 10px 20px 20px;
-  font-size: 1rem;
+  margin: 10px 20px auto;
+  font-size: 0.95rem;
   color: #666;
+  text-transform: none;
+  font-weight: 400;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
 }
 
-.u-section-1 a {
-  margin: 0 20px;
-  color: #ff5722;
+.restaurant-link {
+  display: inline-block;
+  background-color: #0066cc;
+  color: #ffffff !important;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none !important;
   font-size: 0.9rem;
-  text-decoration: underline;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  transition: background-color 0.2s ease;
+}
+
+.restaurant-link:hover {
+  background-color: #004c99;
 }
 
 @media (max-width: 1199px) {
@@ -181,7 +197,7 @@ const goToRestaurant = (id) => {
   }
 
   .u-section-1 [class*='u-image-'] {
-    height: 229px;
+    height: 200px;
   }
 }
 
@@ -195,10 +211,6 @@ const goToRestaurant = (id) => {
     min-height: 2566px;
     grid-auto-columns: calc(50% - 12px);
   }
-
-  .u-section-1 [class*='u-image-'] {
-    height: 263px;
-  }
 }
 
 @media (max-width: 767px) {
@@ -206,19 +218,11 @@ const goToRestaurant = (id) => {
     grid-template-columns: 100%;
     grid-auto-columns: 100%;
   }
-
-  .u-section-1 [class*='u-image-'] {
-    height: 395px;
-  }
 }
 
 @media (max-width: 575px) {
   .u-section-1 .u-text-1 {
     font-size: 2.34375rem;
-  }
-
-  .u-section-1 [class*='u-image-'] {
-    height: 249px;
   }
 }
 </style>

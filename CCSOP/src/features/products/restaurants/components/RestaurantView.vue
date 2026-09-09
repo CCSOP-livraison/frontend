@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import { useRestaurantStore } from '@/features/products/restaurants/stores/useRestaurantStore'
 import { useRoute } from 'vue-router'
 const restaurantStore = useRestaurantStore()
@@ -33,7 +33,12 @@ const goToMenu = () => {
             />
             <p class="u-text u-text-4">{{ restaurantStore.restaurant.summary }}</p>
             <div class="u-btn-container">
-              <p class="dark:bg-blue-800" @click="goToMenu()">voir la carte</p>
+              <button
+                @click="goToMenu()"
+                class="px-6 py-3 text-white font-semibold bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer text-center border-none"
+              >
+                Voir la carte
+              </button>
             </div>
           </div>
 
@@ -48,6 +53,20 @@ const goToMenu = () => {
 </template>
 
 <style scoped>
+button {
+  background-color: #4694e3;
+  color: #ffffff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+}
 .u-section-1 .u-sheet-1 {
   min-height: 711px;
   display: flex;
@@ -100,7 +119,6 @@ const goToMenu = () => {
   margin-top: 10px;
 }
 
-.u-section-1 .u-btn-1,
 .u-section-1 .u-btn-2 {
   --radius: 50px;
   font-weight: 700;

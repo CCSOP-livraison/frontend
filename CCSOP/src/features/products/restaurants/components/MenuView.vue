@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRestaurantStore } from '@/features/products/restaurants/stores/useRestaurantStore'
 import { useRoute } from 'vue-router'
 const restaurantStore = useRestaurantStore()
@@ -65,13 +65,11 @@ const finalPrice = computed(() => {
               </div>
 
               <div class="item-actions-grid">
-                <!-- Colonne Prix Unitaire -->
                 <div class="price-col">
                   <span class="price-label">Prix unitaire</span>
                   <span class="value">{{ item.price.toFixed(2) }} CHF</span>
                 </div>
 
-                <!-- Colonne Quantité -->
                 <div class="quantity-col">
                   <span class="price-label">Quantité</span>
                   <div class="quantity-selector">
@@ -81,7 +79,6 @@ const finalPrice = computed(() => {
                   </div>
                 </div>
 
-                <!-- Colonne Prix Total -->
                 <div class="price-col total-col">
                   <span class="price-label">Prix total</span>
                   <span class="value"
@@ -121,20 +118,19 @@ const finalPrice = computed(() => {
 </template>
 
 <style scoped>
-/* Transformation de la zone d'actions en grille alignée */
+
 .item-actions-grid {
   display: grid;
-  grid-template-columns: 120px 140px 120px; /* Largeurs fixes pour aligner chaque colonne verticalement */
+  grid-template-columns: 120px 140px 120px;
   gap: 20px;
   align-items: center;
 }
 
-/* Style de chaque colonne de prix/quantité */
 .price-col,
 .quantity-col {
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* Aligne les chiffres à droite pour un rendu propre */
+  align-items: flex-end;
 }
 
 .price-label {
@@ -147,7 +143,7 @@ const finalPrice = computed(() => {
 }
 
 .quantity-col {
-  align-items: center; /* Centre les boutons de quantité dans leur colonne */
+  align-items: center;
 }
 
 .quantity-col .price-label {
@@ -186,7 +182,6 @@ const finalPrice = computed(() => {
   color: #2c3e50;
 }
 
-/* Adaptation pour les écrans mobiles */
 @media (max-width: 767px) {
   .cart-item-card {
     flex-direction: column;
@@ -272,19 +267,6 @@ const finalPrice = computed(() => {
   margin: 0;
 }
 
-.item-actions {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-/* Styles pour les colonnes de prix avec labels */
-.price-column {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
 .price-label {
   font-size: 0.75rem;
   color: #888;
@@ -315,12 +297,6 @@ const finalPrice = computed(() => {
 .qty-display {
   font-size: 1rem;
   font-weight: 600;
-}
-
-.item-total {
-  font-size: 1.1rem;
-  color: #2c3e50;
-  min-width: 70px;
 }
 
 .cart-summary-box {
@@ -383,11 +359,6 @@ const finalPrice = computed(() => {
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
-  }
-
-  .item-actions {
-    width: 100%;
-    justify-content: space-between;
   }
 }
 </style>
