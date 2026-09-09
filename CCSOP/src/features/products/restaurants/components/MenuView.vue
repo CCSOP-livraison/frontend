@@ -2,6 +2,7 @@
 import { computed, onMounted } from 'vue'
 import { useRestaurantStore } from '@/features/products/restaurants/stores/useRestaurantStore'
 import { useRoute } from 'vue-router'
+import router from '@/router'
 const restaurantStore = useRestaurantStore()
 const route = useRoute()
 const idRestaurant = route.params.id
@@ -20,7 +21,9 @@ const decrement = (item) => {
     removeItem(item.id)
   }
 }
-
+const goToOrder = () => {
+  router.push(`/order`)
+}
 const removeItem = (id) => {
   restaurantStore.menu.value = restaurantStore.menu.filter((item) => item.id !== id)
 }
@@ -109,7 +112,9 @@ const finalPrice = computed(() => {
               <span>{{ finalPrice.toFixed(2) }} CHF</span>
             </div>
 
-            <button class="u-btn u-button-style checkout-btn">Valider la commande</button>
+            <button @click="goToOrder()" class="u-btn u-button-style checkout-btn">
+              Valider la commande
+            </button>
           </div>
         </div>
       </div>
@@ -118,7 +123,6 @@ const finalPrice = computed(() => {
 </template>
 
 <style scoped>
-
 .item-actions-grid {
   display: grid;
   grid-template-columns: 120px 140px 120px;
