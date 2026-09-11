@@ -1,11 +1,82 @@
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { useOrderStore } from '@/features/products/orders/stores/useOrderStore'
+const orderStore = useOrderStore()
+const route = useRoute()
+const idOrder = 1
+//const idOrder = route.params.id
+onMounted(async () => {
+  await orderStore.getDelivery(idOrder)
+})
+// Données fictives de la commande (dans un vrai projet, ceci vient d'une API via fetch/axios)
+const order = ref({
+  status: 'delivering', // Valeurs possibles : 'pending', 'preparing', 'delivering', 'delivered', 'cancelled'
+  statusText: 'En cours de livraison',
+})
+console.log(orderStore.delivery.orders)
+const subtotal = computed(() => {
+  return orderStore.delivery?.orders?.reduce((acc, item) => acc + item.dish.price * item.quantity, 0)??0
+})
+
+const taxRate = 0.1
+const taxes = computed(() => {
+  return subtotal.value * taxRate
+})
+const TVARate = 0.081
+const TVA = computed(() => {
+  return subtotal.value * TVARate
+})
+
+const finalPrice = computed(() => {
+  return subtotal.value + taxes.value + TVA.value
+})
+// Logique pour déterminer l'état des étapes de la timeline
+const steps = computed(() => {
+  // const currentStatus = order.status.value // ou order.value.status selon la structure
+  const statusKey = orderStore.delivery.status?.name
+
+  return [
+    {
+      title: 'Commande confirmée',
+      description: 'Votre paiement a été validé avec succès.',
+      completed: ['preparing', 'delivering', 'delivered'].includes(statusKey),
+      active: statusKey === 'pending',
+    },
+    {
+      title: 'En cours de préparation',
+      description: 'Le commerçant prépare votre commande.',
+      completed: ['delivering', 'delivered'].includes(statusKey),
+      active: statusKey === 'preparing',
+    },
+    {
+      title: 'En cours de livraison',
+      description: 'Le livreur est en route vers chez vous.',
+      completed: ['delivered'].includes(statusKey),
+      active: statusKey === 'delivering',
+    },
+    {
+      title: 'Livrée',
+      description: 'Bon appétit !',
+      completed: statusKey === 'delivered',
+      active: false,
+    },
+  ]
+})
+// Action pour appeler le livreur
+const callDriver = () => {
+  alert('Appel du livreur en cours...')
+}
+</script>
 <template>
   <div class="order-tracking-page">
     <div class="container">
       <!-- En-tête de la commande -->
       <header class="order-header">
         <h1>Suivi de votre commande</h1>
+        <p>numéro de commande : {{ orderStore.delivery.name }}</p>
         <p class="order-id"></p>
-        <span :class="['badge', order.statusClass]">{{ order.statusText }}</span>
+        <span :class="['badge', 'badge-warning']">{{ order.statusText }}</span>
       </header>
 
       <!-- Temps estimé -->
@@ -16,7 +87,7 @@
         <div class="time-icon">⏱️</div>
         <div>
           <p class="label">Arrivée estimée</p>
-          <p class="time">{{ order.estimatedTime }}</p>
+          <p class="time">15 min</p>
         </div>
       </div>
 
@@ -47,21 +118,30 @@
         <div class="card">
           <h3>📍 Adresse de livraison</h3>
           <p>
-            <strong>{{ order.deliveryAddress.name }}</strong>
+            <strong
+              >{{ orderStore.delivery.customer?.firstname }}
+              {{ orderStore.delivery.customer?.lastname }}</strong
+            >
           </p>
-          <p>{{ order.deliveryAddress.street }}</p>
-          <p>{{ order.deliveryAddress.city }}</p>
+          <p>{{ orderStore.delivery.customer?.address }}</p>
+          <p>
+            {{ orderStore.delivery.customer?.zipcode }} {{ orderStore.delivery.customer?.locate }}
+          </p>
+          <p>Numéro de téléphone : {{ orderStore.delivery.customer?.phoneNumber }}</p>
         </div>
 
         <!-- Contact Livreur (si en cours de livraison) -->
-        <div class="card" v-if="order.deliveryPerson">
+        <div class="card" v-if="orderStore.delivery.deliver">
           <h3>🛵 Votre livreur</h3>
           <div class="delivery-person">
             <div>
               <p>
-                <strong>{{ order.deliveryPerson.name }}</strong>
+                <strong
+                  >{{ orderStore.delivery.deliver?.firstname }}
+                  {{ orderStore.delivery.deliver?.lastname }}</strong
+                >
               </p>
-              <button @click="callDriver" class="btn-secondary">📞 Appeler</button>
+              <p>Numéro de téléphone : {{ orderStore.delivery.deliver?.phoneNumber }}</p>
             </div>
           </div>
         </div>
@@ -71,15 +151,15 @@
       <div class="card order-items-card">
         <h3>🛍️ Articles commandés</h3>
         <ul class="items-list">
-          <li v-for="item in order.items" :key="item.id" class="item-row">
-            <span class="item-name">{{ item.quantity }}x {{ item.name }}</span>
-            <span class="item-price">{{ (item.price * item.quantity).toFixed(2) }} €</span>
+          <li v-for="item in orderStore.delivery.orders" :key="item.id" class="item-row">
+            <span class="item-name">{{ item.quantity }}x {{ item.dish.name }}</span>
+            <span class="item-price">{{ (item.dish.price * item.quantity).toFixed(2) }} CHF</span>
           </li>
         </ul>
         <hr />
         <div class="order-total">
           <span>Total payé</span>
-          <strong>{{ order.total.toFixed(2) }} €</strong>
+          <strong> {{finalPrice.toFixed(2)}} CHF</strong>
         </div>
       </div>
       <div class="conteneur-btn">
@@ -89,73 +169,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref, computed } from 'vue'
-
-// Données fictives de la commande (dans un vrai projet, ceci vient d'une API via fetch/axios)
-const order = ref({
-  id: 'CMD-84920',
-  status: 'delivering', // Valeurs possibles : 'pending', 'preparing', 'delivering', 'delivered', 'cancelled'
-  statusText: 'En cours de livraison',
-  statusClass: 'badge-warning',
-  estimatedTime: 'Dans 15 minutes (19:45)',
-  deliveryAddress: {
-    name: 'Jean Dupont',
-    street: '12 Avenue de la Gare',
-    city: '1003 Lausanne',
-  },
-  deliveryPerson: {
-    name: 'Marc (Scooter Honda)',
-    avatar:
-      'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&h=100&q=80',
-  },
-  items: [
-    { id: 1, name: 'Burger Maison Deluxe', quantity: 2, price: 14.5 },
-    { id: 2, name: 'Frites croustillantes', quantity: 1, price: 4.5 },
-    { id: 3, name: 'Boisson 50cl', quantity: 2, price: 3.0 },
-  ],
-  total: 39.5,
-})
-
-// Logique pour déterminer l'état des étapes de la timeline
-const steps = computed(() => {
-  // const currentStatus = order.status.value // ou order.value.status selon la structure
-  const statusKey = order.value.status
-
-  return [
-    {
-      title: 'Commande confirmée',
-      description: 'Votre paiement a été validé avec succès.',
-      completed: ['preparing', 'delivering', 'delivered'].includes(statusKey),
-      active: statusKey === 'pending',
-    },
-    {
-      title: 'En cours de préparation',
-      description: 'Le commerçant prépare votre commande.',
-      completed: ['delivering', 'delivered'].includes(statusKey),
-      active: statusKey === 'preparing',
-    },
-    {
-      title: 'En cours de livraison',
-      description: 'Le livreur est en route vers chez vous.',
-      completed: ['delivered'].includes(statusKey),
-      active: statusKey === 'delivering',
-    },
-    {
-      title: 'Livrée',
-      description: 'Bon appétit !',
-      completed: statusKey === 'delivered',
-      active: false,
-    },
-  ]
-})
-
-// Action pour appeler le livreur
-const callDriver = () => {
-  alert('Appel du livreur en cours...')
-}
-</script>
 
 <style scoped>
 .conteneur-btn {
