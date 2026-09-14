@@ -21,7 +21,6 @@ export const useRestaurantStore = defineStore('restaurantStore', () => {
       message.value =
         "Impossible de récupéré les données. Merci de corriger les erreurs et réessayer."
       isError.value = true
-      isAuthenticated.value = false
     }
   }
   async function getRestaurant(id) {
@@ -36,7 +35,6 @@ export const useRestaurantStore = defineStore('restaurantStore', () => {
       message.value =
         'Impossible de récupéré les données. Merci de corriger les erreurs et réessayer.'
       isError.value = true
-      isAuthenticated.value = false
     }
   }
   async function getMenu(id) {
@@ -54,6 +52,28 @@ export const useRestaurantStore = defineStore('restaurantStore', () => {
       message.value =
         'Impossible de récupéré les données. Merci de corriger les erreurs et réessayer.'
       isError.value = true
+    }
+  }
+  async function createOrder(menu, customerId) {
+    try {
+       const menu2=menu.map(item=>{
+          return {
+            quantity: item.quantity,
+            dishId: item.id,
+        }
+      });
+      const response = await api.post('/deliveries', {
+       menu:menu2,
+        customerId: customerId,
+      })
+
+      isError.value = false
+      message.value = 'Commande créer avec succès !'
+    } catch (err) {
+      console.error("Détail de l'erreur:", err)
+      message.value =
+        "Impossible d'envoyer votre message. Merci de corriger les erreurs et réessayer."
+      isError.value = true
       isAuthenticated.value = false
     }
   }
@@ -63,6 +83,7 @@ export const useRestaurantStore = defineStore('restaurantStore', () => {
     menu,
     message,
     isError,
+    createOrder,
     isAuthenticated,
     getRestaurants,
     getRestaurant,

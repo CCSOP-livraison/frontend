@@ -62,10 +62,7 @@ const steps = computed(() => {
     },
   ]
 })
-// Action pour appeler le livreur
-const callDriver = () => {
-  alert('Appel du livreur en cours...')
-}
+
 </script>
 <template>
   <div class="order-tracking-page">

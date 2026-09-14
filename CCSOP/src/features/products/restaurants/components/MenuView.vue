@@ -21,7 +21,9 @@ const decrement = (item) => {
     removeItem(item.id)
   }
 }
-const goToOrder = () => {
+const userid = 1
+function goToOrder (){
+  restaurantStore.createOrder(restaurantStore.menu, userid)
   router.push(`/order`)
 }
 const removeItem = (id) => {
@@ -112,7 +114,7 @@ const finalPrice = computed(() => {
               <span>{{ finalPrice.toFixed(2) }} CHF</span>
             </div>
 
-            <button @click="goToOrder()" class="u-btn u-button-style checkout-btn">
+            <button  @click="goToOrder()" class="u-btn u-button-style checkout-btn">
               Valider la commande
             </button>
           </div>
