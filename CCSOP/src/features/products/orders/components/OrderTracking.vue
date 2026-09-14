@@ -4,8 +4,7 @@ import { useRoute } from 'vue-router'
 import { useOrderStore } from '@/features/products/orders/stores/useOrderStore'
 const orderStore = useOrderStore()
 const route = useRoute()
-const idOrder = 1
-//const idOrder = route.params.id
+const idOrder = route.params.id
 onMounted(async () => {
   await orderStore.getDelivery(idOrder)
 })

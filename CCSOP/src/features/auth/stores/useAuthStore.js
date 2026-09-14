@@ -24,7 +24,7 @@ export const useAuthStore = defineStore('auth', () => {
               router.push('/dashboard-customer')
               break
             case 'DELIVER':
-              router.push('/dashboard-worker')
+              router.push('/orders')
               break
           }
           isError.value = false

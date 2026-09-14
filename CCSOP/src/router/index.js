@@ -35,9 +35,9 @@ const router = createRouter({
       component: () => import('@/views/dashboard/ModerationView.vue'),
     },
     {
-      path: '/dashboard-worker',
-      name: 'dashboard-worker',
-      component: () => import('@/views/dashboard/WorkerView.vue'),
+      path: '/orders',
+      name: 'orders',
+      component: () => import('@/features/products/orders/components/Orders.vue'),
     },
     {
       path: '/restaurant/:id',
@@ -50,8 +50,8 @@ const router = createRouter({
       component: () => import('@/features/products/restaurants/components/MenuView.vue'),
     },
     {
-      path: '/order',
-      name: 'order',
+      path: '/order/:id',
+      name: 'order/:id',
       component: () => import('@/features/products/orders/components/OrderTracking.vue'),
     },
   ],
