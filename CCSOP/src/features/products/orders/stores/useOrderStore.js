@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { reactive, ref } from 'vue'
 import api from '@/services/api'
+import router from '@/router'
 
 export const useOrderStore = defineStore('OrderStore', () => {
   const message = ref('')
@@ -46,6 +47,45 @@ export const useOrderStore = defineStore('OrderStore', () => {
       isError.value = true
     }
   }
+  async function putStatusPreparing(id,deliverId) {
+    try {
+      await api.put('/deliveries/' + id + '/preparing',{deliverId:deliverId} )
+      isError.value = false
+      message.value = 'données changées !'
+      router.push('/orders')
+    } catch (err) {
+      console.error("Détail de l'erreur:", err)
+      message.value =
+        'Impossible de récupéré les données. Merci de corriger les erreurs et réessayer.'
+      isError.value = true
+    }
+  }
+  async function putStatusDelivered(id) {
+    try {
+      await api.put('/deliveries/' + id +"/delivered")
+      isError.value = false
+      message.value = 'données changées !'
+      router.push('/orders')
+    } catch (err) {
+      console.error("Détail de l'erreur:", err)
+      message.value =
+        'Impossible de récupéré les données. Merci de corriger les erreurs et réessayer.'
+      isError.value = true
+    }
+  }
+  async function putStatusClose(id) {
+    try {
+      await api.put('/deliveries/' + id + '/close')
+      isError.value = false
+      message.value = 'données changées !'
+      router.push('/orders')
+    } catch (err) {
+      console.error("Détail de l'erreur:", err)
+      message.value =
+        'Impossible de récupéré les données. Merci de corriger les erreurs et réessayer.'
+      isError.value = true
+    }
+  }
     async function getDeliveriesByCustomer(id) {
       try {
         const response = await api.get('/deliveries/customer/' + id)
@@ -64,6 +104,9 @@ export const useOrderStore = defineStore('OrderStore', () => {
     delivery,
     message,
     isError,
+    putStatusPreparing,
+    putStatusClose,
+    putStatusDelivered,
     getDeliveries,
     getDelivery,
     getDeliveriesByCustomer,

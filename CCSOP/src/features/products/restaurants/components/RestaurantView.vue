@@ -1,29 +1,47 @@
 <script setup>
 import { onMounted } from 'vue'
 import { useRestaurantStore } from '@/features/products/restaurants/stores/useRestaurantStore'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+
 const restaurantStore = useRestaurantStore()
 const route = useRoute()
-import { useRouter } from 'vue-router'
 const router = useRouter()
 const idRestaurant = route.params.id
+
 onMounted(async () => {
   await restaurantStore.getRestaurant(idRestaurant)
 })
+
 const goToMenu = () => {
   router.push(`/menu/${idRestaurant}`)
+}
+
+// Fonction pour retourner à la page précédente
+const goBack = () => {
+  router.back()
 }
 </script>
 
 <template>
-  <body
+  <!-- Remplacement de <body> par un conteneur flex global -->
+  <div
+    class="page-container u-grey-80 u-body u-clearfix u-xxl-mode"
     data-path-to-root="../"
     data-include-products="false"
-    class="u-body u-clearfix u-xl-mode"
     data-lang="fr"
   >
-    <section class="u-clearfix u-grey-80 u-section-1" id="block-3">
+    <section class="u-clearfix u-section-1" id="block-3">
       <div class="u-clearfix u-sheet u-sheet-1">
+        <!-- Bouton Retour -->
+        <div class="mb-6">
+          <button
+            @click="goBack"
+            class="px-4 py-2 text-sm font-semibold text-gray-300 bg-gray-700 hover:bg-gray-600 rounded-lg shadow transition-all duration-200 cursor-pointer border-none flex items-center gap-2"
+          >
+            ← Retour
+          </button>
+        </div>
+
         <div class="u-restaurant-layout">
           <div class="u-column-left">
             <img
@@ -59,11 +77,24 @@ const goToMenu = () => {
         </div>
       </div>
     </section>
-  </body>
+  </div>
 </template>
 
 <style scoped>
-.locality{
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 70vh;
+  margin: 0 auto;
+  max-width: 100%;
+  width: 100%;
+}
+
+.u-section-1 {
+  flex: 1;
+}
+
+.locality {
   padding: 2%;
 }
 .restaurant-card h2 {
@@ -87,6 +118,7 @@ const goToMenu = () => {
   display: block;
   font-weight: 500;
 }
+
 button {
   background-color: #4694e3;
   color: #ffffff;
@@ -101,6 +133,7 @@ button {
     background-color 0.2s,
     transform 0.1s;
 }
+
 .u-section-1 .u-sheet-1 {
   min-height: 711px;
   display: flex;
@@ -161,12 +194,5 @@ button {
   letter-spacing: 1px;
   padding: 9px 34px 11px 33px;
   margin: 0;
-}
-
-@media (max-width: 991px) {
-  .u-section-1 .u-restaurant-layout {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
 }
 </style>

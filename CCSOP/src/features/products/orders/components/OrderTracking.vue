@@ -1,26 +1,46 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router' // 1. Import de useRouter
 import { useOrderStore } from '@/features/products/orders/stores/useOrderStore'
 import { useAuthStore } from '@/features/auth/stores/useAuthStore'
+
 const orderStore = useOrderStore()
 const route = useRoute()
+const router = useRouter() // 2. Initialisation du router
 const idOrder = route.params.id
+
 onMounted(async () => {
   await orderStore.getDelivery(idOrder)
 })
-// Données fictives de la commande (dans un vrai projet, ceci vient d'une API via fetch/axios)
+
+// 3. Fonction pour retourner en arrière
+function goBack() {
+  router.back()
+}
+
 const order = ref({
-  status: 'delivering', // Valeurs possibles : 'pending', 'preparing', 'delivering', 'delivered', 'cancelled'
+  status: 'delivering',
   statusText: 'En cours de livraison',
 })
-console.log(orderStore.delivery.orders)
+
 const subtotal = computed(() => {
   return (
     orderStore.delivery?.orders?.reduce((acc, item) => acc + item.dish.price * item.quantity, 0) ??
     0
   )
 })
+
+function assignDeliver() {
+  orderStore.putStatusPreparing(idOrder, useAuthStore().userId)
+}
+
+function validationDeliver() {
+  orderStore.putStatusDelivered(idOrder)
+}
+
+function closeDeliver() {
+  orderStore.putStatusClose(idOrder)
+}
 
 const taxRate = 0.1
 const taxes = computed(() => {
@@ -34,48 +54,49 @@ const TVA = computed(() => {
 const finalPrice = computed(() => {
   return subtotal.value + taxes.value + TVA.value
 })
-// Logique pour déterminer l'état des étapes de la timeline
+
 const steps = computed(() => {
-  // const currentStatus = order.status.value // ou order.value.status selon la structure
   const statusKey = orderStore.delivery.status?.name
 
   return [
     {
       title: 'Commande confirmée',
       description: 'Votre paiement a été validé avec succès.',
-      completed: ['preparing', 'delivering', 'delivered'].includes(statusKey),
+      completed: ['preparing', 'delivered', 'closed'].includes(statusKey),
       active: statusKey === 'pending',
     },
     {
       title: 'En cours de préparation',
       description: 'Le commerçant prépare votre commande.',
-      completed: ['delivering', 'delivered'].includes(statusKey),
+      completed: ['delivered', 'closed'].includes(statusKey),
       active: statusKey === 'preparing',
     },
     {
-      title: 'En cours de livraison',
-      description: 'Le livreur est en route vers chez vous.',
-      completed: ['delivered'].includes(statusKey),
-      active: statusKey === 'delivering',
+      title: 'Livrée',
+      description: 'Le livreur est arrivé vers chez vous.',
+      completed: ['closed'].includes(statusKey),
+      active: statusKey === 'delivered',
     },
     {
-      title: 'Livrée',
+      title: 'Fermée',
       description: 'Bon appétit !',
-      completed: statusKey === 'delivered',
+      completed: statusKey === 'closed',
       active: false,
     },
   ]
 })
 </script>
+
 <template>
   <div class="order-tracking-page">
     <div class="container">
+      <!-- 4. Bouton Retour -->
+      <button class="btn-back" @click="goBack">← Retour</button>
+
       <!-- En-tête de la commande -->
       <header class="order-header">
         <h1>Suivi de votre commande</h1>
         <p>numéro de commande : {{ orderStore.delivery.name }}</p>
-        <p class="order-id"></p>
-        <span :class="['badge', 'badge-warning']">{{ order.statusText }}</span>
       </header>
 
       <!-- Temps estimé -->
@@ -117,10 +138,10 @@ const steps = computed(() => {
         <div class="card">
           <h3>📍 Adresse de livraison</h3>
           <p>
-            <strong
-              >{{ orderStore.delivery.customer?.firstname }}
-              {{ orderStore.delivery.customer?.lastname }}</strong
-            >
+            <strong>
+              {{ orderStore.delivery.customer?.firstname }}
+              {{ orderStore.delivery.customer?.lastname }}
+            </strong>
           </p>
           <p>{{ orderStore.delivery.customer?.address }}</p>
           <p>
@@ -129,18 +150,35 @@ const steps = computed(() => {
           <p>Numéro de téléphone : {{ orderStore.delivery.customer?.phoneNumber }}</p>
         </div>
 
-        <!-- Contact Livreur (si en cours de livraison) -->
-        <div class="card" v-if="orderStore.delivery.deliver">
+        <!-- Contact Livreur -->
+        <div class="card" v-if="orderStore.delivery.deliver && useAuthStore().role === 'CUSTOMER'">
           <h3>🛵 Votre livreur</h3>
           <div class="delivery-person">
             <div>
               <p>
-                <strong
-                  >{{ orderStore.delivery.deliver?.firstname }}
-                  {{ orderStore.delivery.deliver?.lastname }}</strong
-                >
+                <strong>
+                  {{ orderStore.delivery.deliver?.firstname }}
+                  {{ orderStore.delivery.deliver?.lastname }}
+                </strong>
               </p>
               <p>Numéro de téléphone : {{ orderStore.delivery.deliver?.phoneNumber }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact restaurant -->
+        <div class="card" v-if="useAuthStore().role === 'DELIVER'">
+          <h3>Le restaurant</h3>
+          <div class="delivery-person">
+            <div>
+              <p>
+                <strong>{{ orderStore.delivery.orders[0]?.dish?.restaurant?.name }}</strong>
+              </p>
+              <p>{{ orderStore.delivery.orders[0]?.dish?.restaurant?.address }}</p>
+              <p>
+                {{ orderStore.delivery.orders[0]?.dish?.restaurant?.zipcode }}
+                {{ orderStore.delivery.orders[0]?.dish?.restaurant?.locate }}
+              </p>
             </div>
           </div>
         </div>
@@ -161,23 +199,51 @@ const steps = computed(() => {
           <strong> {{ finalPrice.toFixed(2) }} CHF</strong>
         </div>
       </div>
+
       <div v-if="useAuthStore().role === 'DELIVER'" class="conteneur-btn">
-        <button>Valider livraison</button>
-        <button v-if="orderStore.delivery.deliver">Echec de la livraison</button>
-        <button v-else>S'attribuer la livraison</button>
+        <div v-if="orderStore.delivery.deliver && orderStore.delivery.status?.name === 'preparing'">
+          <button v-if="false">Echec de la livraison</button>
+          <button @click="validationDeliver">Valider livraison</button>
+        </div>
+        <button v-if="orderStore.delivery.status?.name === 'pending'" @click="assignDeliver()">
+          S'attribuer la livraison
+        </button>
       </div>
+
       <div v-if="useAuthStore().role === 'CUSTOMER'" class="conteneur-btn">
-        <button>Valider livraison</button>
-        <button>Annuler livraison</button>
+        <button v-if="orderStore.delivery.status?.name === 'delivered'" @click="closeDeliver()">
+          Valider livraison
+        </button>
+        <button v-if="false">Annuler livraison</button>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+/* Style spécifique pour le bouton retour */
+.btn-back {
+  background-color: #e9ecef;
+  color: #495057;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s;
+}
+
+.btn-back:hover {
+  background-color: #dde2e6;
+}
+
 .conteneur-btn {
   text-align: center;
 }
+
 button {
   background-color: #4694e3;
   color: #ffffff;
@@ -194,6 +260,7 @@ button {
     background-color 0.2s,
     transform 0.1s;
 }
+
 /* Style général de la page */
 .order-tracking-page {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -217,23 +284,6 @@ button {
 .order-header h1 {
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
-}
-
-.order-id {
-  color: #666;
-  margin-bottom: 0.8rem;
-}
-
-.badge {
-  display: inline-block;
-  padding: 0.35rem 0.75rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  border-radius: 50px;
-}
-.badge-warning {
-  background-color: #fff3cd;
-  color: #856404;
 }
 
 /* Carte temps estimé */
@@ -324,7 +374,6 @@ button {
   margin: 0;
 }
 
-/* Étapes complétées ou actives */
 .step.completed .dot {
   background-color: #28a745;
   box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
@@ -386,34 +435,10 @@ button {
   color: #555;
 }
 
-/* Livreur */
 .delivery-person {
   display: flex;
   align-items: center;
   gap: 1rem;
-}
-
-.avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.btn-secondary {
-  margin-top: 0.5rem;
-  background-color: #e9ecef;
-  border: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.2s;
-}
-
-.btn-secondary:hover {
-  background-color: #dde2e6;
 }
 
 /* Liste des articles */

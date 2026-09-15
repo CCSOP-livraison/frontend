@@ -1,15 +1,21 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { useRestaurantStore } from '@/features/products/restaurants/stores/useRestaurantStore'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/features/auth/stores/useAuthStore'
 
 const restaurantStore = useRestaurantStore()
 const route = useRoute()
+const router = useRouter()
 const idRestaurant = route.params.id
+
 onMounted(async () => {
   await restaurantStore.getMenu(idRestaurant)
 })
+
+const goBack = () => {
+  router.back()
+}
 
 const increment = (item) => {
   item.quantity++
@@ -24,10 +30,10 @@ const decrement = (item) => {
 }
 const cartEmpty = ref(true)
 function goToOrder() {
-    restaurantStore.createOrder(restaurantStore.menu, useAuthStore().userId)
+  restaurantStore.createOrder(restaurantStore.menu, useAuthStore().userId)
 }
 const removeItem = (id) => {
-  restaurantStore.menu.value = restaurantStore.menu.filter((item) => item.id !== id)
+  restaurantStore.menu = restaurantStore.menu.filter((item) => item.id !== id)
 }
 
 const subtotal = computed(() => {
@@ -46,8 +52,7 @@ const TVA = computed(() => {
 const finalPrice = computed(() => {
   if (subtotal.value > 0) {
     cartEmpty.value = false
-  }
-  else{
+  } else {
     cartEmpty.value = true
   }
   return subtotal.value + taxes.value + TVA.value
@@ -61,7 +66,12 @@ const finalPrice = computed(() => {
       id="cart-summary"
     >
       <div class="u-clearfix u-sheet u-sheet-1">
-        <h2 class="u-align-center u-text u-text-default u-text-1">Votre Panier</h2>
+        <!-- Bouton Retour -->
+        <div class="back-btn-container">
+          <button @click="goBack" class="back-btn">← Retour</button>
+        </div>
+
+        <h2 class="u-align-center u-text u-text-default u-text-1">La carte du restaurant</h2>
 
         <div v-if="restaurantStore.menu.length === 0" class="empty-cart">
           <p>Votre panier est actuellement vide.</p>
@@ -135,6 +145,30 @@ const finalPrice = computed(() => {
 </template>
 
 <style scoped>
+/* Style pour le bouton Retour */
+.back-btn-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  color: #333;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s;
+}
+
+.back-btn:hover {
+  background-color: #f0f0f0;
+}
+
 .item-actions-grid {
   display: grid;
   grid-template-columns: 120px 140px 120px;
@@ -283,38 +317,6 @@ const finalPrice = computed(() => {
   margin: 0;
 }
 
-.price-label {
-  font-size: 0.75rem;
-  color: #888;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.quantity-selector {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.qty-btn {
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  width: 25px;
-  height: 25px;
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.qty-btn:hover {
-  background-color: #e0e0e0;
-}
-
-.qty-display {
-  font-size: 1rem;
-  font-weight: 600;
-}
-
 .cart-summary-box {
   background: #ffffff;
   padding: 25px;
@@ -368,13 +370,5 @@ const finalPrice = computed(() => {
 
 .checkout-btn:hover {
   background-color: #e64a19;
-}
-
-@media (max-width: 767px) {
-  .cart-item-card {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-  }
 }
 </style>

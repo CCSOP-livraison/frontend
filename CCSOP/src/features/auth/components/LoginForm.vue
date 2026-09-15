@@ -79,11 +79,10 @@ const handleSubmit = () => {
 
 <style scoped>
 .u-section-1 .u-sheet-1 {
-  min-height: 480px;
+  min-height: 20vh;
 }
 
 .u-section-1 .u-form-1 {
-  height: 241px;
   width: 570px;
   margin: 108px auto 60px;
 }

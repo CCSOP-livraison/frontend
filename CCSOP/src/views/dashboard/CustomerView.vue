@@ -1,65 +1,32 @@
-<script setup xmlns="http://www.w3.org/1999/html">
+<script setup>
 import { onMounted } from 'vue'
 import { useRestaurantStore } from '@/features/products/restaurants/stores/useRestaurantStore'
 import { RouterLink } from 'vue-router'
 
 const restaurantStore = useRestaurantStore()
+
 onMounted(async () => {
   await restaurantStore.getRestaurants()
 })
 </script>
 
 <template>
-  <body
-    data-path-to-root="../"
-    data-include-products="false"
-    class="u-body u-clearfix u-xl-mode"
-    data-lang="fr"
-  >
-    <section
-      class="u-align-center u-clearfix u-container-align-center u-grey-10 u-section-1"
-      id="block-2"
-    >
-      <div
-        class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1"
-      >
-        <h2
-          class="u-align-center u-text u-text-default u-text-1"
-          data-animation-name="customAnimationIn"
-          data-animation-duration="1500"
-        >
-          Nos restaurants partenaires
-        </h2>
-        <div class="u-expanded-width u-list u-list-1">
-          <div class="u-repeater u-repeater-1">
+  <div class="u-body u-clearfix u-xl-mode" data-lang="fr">
+    <section class="u-align-center u-clearfix u-grey-10 u-section-1" id="block-2">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h2 class="u-align-center u-text u-text-1">Nos restaurants partenaires</h2>
+
+        <div class="u-expanded-width u-list">
+          <div class="u-repeater">
             <div
-              v-for="(restaurant, index) in restaurantStore.restaurants"
+              v-for="restaurant in restaurantStore.restaurants"
               :key="restaurant.id"
-              :class="[
-                'u-align-center u-container-align-center u-container-align-center-md u-container-align-center-sm u-container-align-center-xs u-container-style u-list-item u-repeater-item u-shape-rectangle u-video-cover u-white',
-                `u-list-item-${index + 1}`,
-              ]"
-              data-animation-name="customAnimationIn"
-              data-animation-duration="1500"
-              data-animation-delay="500"
+              class="u-align-center u-container-style u-list-item u-repeater-item u-shape-rectangle u-white"
             >
-              <div
-                :class="[
-                  'u-container-layout u-similar-container u-valign-top-md u-valign-top-sm u-valign-top-xs',
-                  `u-container-layout-${index + 1}`,
-                ]"
-              >
-                <img
-                  alt=""
-                  :class="['u-expanded-width u-image u-image-default', `u-image-${index + 1}`]"
-                  :src="restaurant.picture"
-                />
-                <h4 :class="['u-align-center u-text', `u-text-${index * 2 + 2}`]">
-                  {{ restaurant.name }}
-                </h4>
-                <p :class="['u-align-center u-text', `u-text-${index * 2 + 3}`]">
-                  {{ restaurant.summary }}
-                </p>
+              <div class="u-container-layout">
+                <img alt="" class="u-expanded-width u-image" :src="restaurant.picture" />
+                <h4 class="u-align-center u-text">{{ restaurant.name }}</h4>
+                <p class="u-align-center u-text">{{ restaurant.summary }}</p>
                 <RouterLink :to="`/restaurant/${restaurant.id}`" class="restaurant-link">
                   En savoir plus
                 </RouterLink>
@@ -69,18 +36,13 @@ onMounted(async () => {
         </div>
       </div>
     </section>
-  </body>
+  </div>
 </template>
 
 <style scoped>
 .u-section-1 {
   background-image: none;
   box-shadow: 5px 5px 30px 0 rgba(0, 0, 0, 0.2);
-  --animation-custom_in-translate_x: 0px;
-  --animation-custom_in-translate_y: 300px;
-  --animation-custom_in-opacity: 0;
-  --animation-custom_in-rotate: 0deg;
-  --animation-custom_in-scale: 1;
   padding: 0 0 50px;
   font-size: 1.625rem;
   margin: 40px 30px 0;
@@ -89,29 +51,22 @@ onMounted(async () => {
 }
 
 .u-section-1 .u-sheet-1 {
-  min-height: 1976px;
+  /* Remplacement des min-height fixes par un comportement flexible */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .u-section-1 .u-text-1 {
   font-size: 3.75rem;
-  --animation-custom_in-translate_x: 0px;
-  --animation-custom_in-translate_y: 0px;
-  --animation-custom_in-opacity: 0;
-  --animation-custom_in-rotate: 0deg;
-  --animation-custom_in-scale: 0.3;
-  margin: 60px auto 0;
+  margin: 60px auto;
 }
 
-.u-section-1 .u-list-1 {
-  grid-template-rows: repeat(1, auto);
-  margin: 66px 0 60px;
-}
-
-.u-section-1 .u-repeater-1 {
+.u-section-1 .u-repeater {
+  display: grid;
   grid-template-columns: repeat(3, calc(33.3333% - 16px));
-  min-height: 1625px;
-  --gap: 24px;
-  grid-auto-columns: calc(33.3333% - 16px);
+  gap: 24px;
+  margin: 66px 0 60px;
 }
 
 .u-section-1 .u-list-item {
@@ -119,11 +74,12 @@ onMounted(async () => {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
   height: 450px;
 }
 
-.u-section-1 [class*='u-container-layout-'] {
+.u-section-1 .u-container-layout {
   padding: 0 0 20px;
   display: flex;
   flex-direction: column;
@@ -131,20 +87,12 @@ onMounted(async () => {
   align-items: center;
 }
 
-
-.u-section-1 [class*='u-image-'] {
+.u-section-1 .u-image {
   width: 100%;
   height: 220px;
   object-fit: cover;
-  margin: 0;
-}
-
-.u-section-1 {
-  object-position: 100% 50%;
-}
-
-.u-section-1 {
   object-position: 50%;
+  margin: 0;
 }
 
 .u-section-1 h4 {
@@ -188,35 +136,20 @@ onMounted(async () => {
   .u-section-1 .u-text-1 {
     margin-top: 117px;
   }
-
-  .u-section-1 .u-repeater-1 {
+  .u-section-1 .u-repeater {
     grid-template-columns: repeat(3, calc(33.3333% - 16px));
-    min-height: 1340px;
-    grid-gap: 24px;
-    grid-auto-columns: calc(33.3333% - 16px);
-  }
-
-  .u-section-1 [class*='u-image-'] {
-    height: 200px;
   }
 }
 
 @media (max-width: 991px) {
-  .u-section-1 .u-text-1 {
-    margin-top: 60px;
-  }
-
-  .u-section-1 .u-repeater-1 {
+  .u-section-1 .u-repeater {
     grid-template-columns: repeat(2, calc(50% - 12px));
-    min-height: 2566px;
-    grid-auto-columns: calc(50% - 12px);
   }
 }
 
 @media (max-width: 767px) {
-  .u-section-1 .u-repeater-1 {
+  .u-section-1 .u-repeater {
     grid-template-columns: 100%;
-    grid-auto-columns: 100%;
   }
 }
 

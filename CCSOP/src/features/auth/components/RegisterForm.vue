@@ -54,7 +54,7 @@ const handleSubmit = () => {
             <div class="u-form-group u-form-name u-form-partition-factor-2 u-form-group-2">
               <label for="last-name-85b7" class="u-label">Nom</label>
               <input
-                v-model="name"
+                v-model="Name"
                 placeholder="Saisir votre Nom"
                 name="name"
                 class="u-input u-input-rectangle"
@@ -156,13 +156,13 @@ const handleSubmit = () => {
 
 <style scoped>
 .u-section-1 .u-sheet-1 {
-  min-height: 1107px;
+  min-height: auto; /* Réduit la hauteur minimale globale */
 }
 
 .u-section-1 .u-form-1 {
-  height: 750px;
+  height: auto;
   width: 570px;
-  margin: 162px auto 60px;
+  margin: 40px auto 30px; /* Marges haut et bas réduites (au lieu de 162px / 60px) */
 }
 
 .u-section-1 .u-form-group-1,
