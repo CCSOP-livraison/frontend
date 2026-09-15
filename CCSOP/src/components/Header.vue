@@ -3,21 +3,25 @@ import LinkHeader from '@/components/LinkHeader.vue'
 </script>
 
 <template>
-  <header class="u-clearfix u-header u-sticky u-header" id="header">
+  <header class="u-clearfix u-header u-sticky" id="header">
     <div
-      class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1"
+      class="u-clearfix u-sheet u-sheet-1"
       style="
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
         max-width: 1200px;
+        margin: 0 auto;
         padding: 0 20px;
+        min-height: 80px;
       "
     >
-      <a href="#" class="u-image u-logo u-image-1" style="margin-left: 10px">
-        <img alt="logo" src="../../public/images/default-logo.png" class="u-logo-image u-logo-image-1" />
-      </a>
+      <RouterLink to="/">
+        <img alt="logo" src="../../public/images/default-logo.png" class="u-logo-image
+        u-logo-image-1" style="max-height: 50px; width: auto" />
+      </RouterLink>
+
       <nav
         class="u-menu u-menu-one-level u-offcanvas u-menu-1"
         role="navigation"
@@ -51,11 +55,17 @@ import LinkHeader from '@/components/LinkHeader.vue'
             </svg>
           </a>
         </div>
+
         <div class="u-custom-menu u-nav-container">
-          <ul class="u-nav u-unstyled u-nav-1" role="menubar" style="display: flex; gap: 20px">
+          <ul
+            class="u-nav u-unstyled u-nav-1"
+            role="menubar"
+            style="display: flex; align-items: center; gap: 25px; margin: 0"
+          >
             <LinkHeader></LinkHeader>
           </ul>
         </div>
+
         <div
           class="u-custom-menu u-nav-container-collapse"
           id="a819"
@@ -79,4 +89,8 @@ import LinkHeader from '@/components/LinkHeader.vue'
   </header>
 </template>
 
-<style scoped></style>
+<style scoped>
+.u-header .u-sheet-1 {
+  position: relative;
+}
+</style>
