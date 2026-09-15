@@ -49,7 +49,7 @@ export const useAuthStore = defineStore('auth', () => {
     password,
   ) {
     try {
-      const response = await api.post('auth/register', {
+      const response = await api.post('auth/register', Request[{
         firstname: firstname,
         lastname: lastname,
         address: address,
@@ -58,7 +58,7 @@ export const useAuthStore = defineStore('auth', () => {
         phoneNumber: phoneNumber,
         email: email,
         password: password,
-      })
+      }])
 
       isError.value = false
       isAuthenticated.value = true

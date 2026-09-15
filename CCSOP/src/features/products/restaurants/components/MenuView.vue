@@ -2,7 +2,7 @@
 import { computed, onMounted } from 'vue'
 import { useRestaurantStore } from '@/features/products/restaurants/stores/useRestaurantStore'
 import { useRoute } from 'vue-router'
-import router from '@/router'
+
 const restaurantStore = useRestaurantStore()
 const route = useRoute()
 const idRestaurant = route.params.id
@@ -24,7 +24,6 @@ const decrement = (item) => {
 const userid = 1
 function goToOrder (){
   restaurantStore.createOrder(restaurantStore.menu, userid)
-  router.push(`/order`)
 }
 const removeItem = (id) => {
   restaurantStore.menu.value = restaurantStore.menu.filter((item) => item.id !== id)

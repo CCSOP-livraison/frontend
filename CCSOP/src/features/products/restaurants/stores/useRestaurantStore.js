@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import api from '@/services/api'
+import router from '@/router'
 
 export const useRestaurantStore = defineStore('restaurantStore', () => {
   const message = ref('')
@@ -9,6 +10,7 @@ export const useRestaurantStore = defineStore('restaurantStore', () => {
   const restaurant = ref({})
   const isError = ref(false)
   const isAuthenticated = ref(false)
+  const order = ref({})
   async function getRestaurants() {
     try {
       const response = await api.get('/restaurants', {
@@ -63,21 +65,22 @@ export const useRestaurantStore = defineStore('restaurantStore', () => {
         }
       });
       const response = await api.post('/deliveries', {
-       menu:menu2,
+        menu: menu2,
         customerId: customerId,
       })
 
       isError.value = false
       message.value = 'Commande créer avec succès !'
+      router.push(`/order/`+response.data.id.toString())
     } catch (err) {
       console.error("Détail de l'erreur:", err)
       message.value =
         "Impossible d'envoyer votre message. Merci de corriger les erreurs et réessayer."
       isError.value = true
-      isAuthenticated.value = false
     }
   }
   return {
+    order,
     restaurants,
     restaurant,
     menu,
