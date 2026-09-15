@@ -2,6 +2,7 @@
 import { computed, onMounted } from 'vue'
 import { useRestaurantStore } from '@/features/products/restaurants/stores/useRestaurantStore'
 import { useRoute } from 'vue-router'
+import { useAuthStore } from '@/features/auth/stores/useAuthStore'
 
 const restaurantStore = useRestaurantStore()
 const route = useRoute()
@@ -21,9 +22,9 @@ const decrement = (item) => {
     removeItem(item.id)
   }
 }
-const userid = 1
+
 function goToOrder (){
-  restaurantStore.createOrder(restaurantStore.menu, userid)
+  restaurantStore.createOrder(restaurantStore.menu, useAuthStore().userId)
 }
 const removeItem = (id) => {
   restaurantStore.menu.value = restaurantStore.menu.filter((item) => item.id !== id)

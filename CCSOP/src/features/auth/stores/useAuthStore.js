@@ -7,13 +7,16 @@ export const useAuthStore = defineStore('auth', () => {
   const message = ref('')
   const isError = ref(false)
   const isAuthenticated = ref(false)
+  const userId=ref('')
+  const role = ref('')
       async function login(email, password) {
         try {
           const response = await api.post('auth/login', {
             email: email,
             password: password
           })
-          switch (response.data.roles[0].name) {
+          role.value = response.data.roles[0].name
+          switch (role.value) {
             case 'ADMIN':
               router.push('/dashboard-admin')
               break
@@ -29,7 +32,9 @@ export const useAuthStore = defineStore('auth', () => {
           }
           isError.value = false
           isAuthenticated.value = true
-          message.value = "Connexion réussie !"
+          message.value = 'Connexion réussie !'
+          userId.value = response.data.id.toString()
+
         } catch (err) {
           console.error('Détail de l\'erreur:', err)
           message.value =
@@ -63,6 +68,7 @@ export const useAuthStore = defineStore('auth', () => {
       isError.value = false
       isAuthenticated.value = true
       message.value = 'Inscription réussie !'
+      userId.value = response.data.id.toString()
     } catch (err) {
       console.error("Détail de l'erreur:", err)
       message.value =
@@ -73,6 +79,8 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   return {
+    role,
+    userId,
     message,
     isError,
     isAuthenticated,
