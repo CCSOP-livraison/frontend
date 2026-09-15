@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRestaurantStore } from '@/features/products/restaurants/stores/useRestaurantStore'
 import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/features/auth/stores/useAuthStore'
@@ -22,9 +22,9 @@ const decrement = (item) => {
     removeItem(item.id)
   }
 }
-
-function goToOrder (){
-  restaurantStore.createOrder(restaurantStore.menu, useAuthStore().userId)
+const cartEmpty = ref(true)
+function goToOrder() {
+    restaurantStore.createOrder(restaurantStore.menu, useAuthStore().userId)
 }
 const removeItem = (id) => {
   restaurantStore.menu.value = restaurantStore.menu.filter((item) => item.id !== id)
@@ -44,6 +44,12 @@ const TVA = computed(() => {
 })
 
 const finalPrice = computed(() => {
+  if (subtotal.value > 0) {
+    cartEmpty.value = false
+  }
+  else{
+    cartEmpty.value = true
+  }
   return subtotal.value + taxes.value + TVA.value
 })
 </script>
@@ -114,7 +120,11 @@ const finalPrice = computed(() => {
               <span>{{ finalPrice.toFixed(2) }} CHF</span>
             </div>
 
-            <button  @click="goToOrder()" class="u-btn u-button-style checkout-btn">
+            <button
+              :disabled="cartEmpty"
+              @click="goToOrder()"
+              class="u-btn u-button-style checkout-btn"
+            >
               Valider la commande
             </button>
           </div>
