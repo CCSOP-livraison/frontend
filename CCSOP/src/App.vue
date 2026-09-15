@@ -4,6 +4,6 @@ import AppHeader from './components/Header.vue'
 </script>
 <template>
   <AppHeader />
-  <RouterView />
+  <router-view :key="$route.fullPath" />
   <AppFooter />
 </template>

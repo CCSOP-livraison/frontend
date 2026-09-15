@@ -1,10 +1,23 @@
 <script setup xmlns="http://www.w3.org/1999/html">
-import { computed, onMounted } from 'vue'
-import { RouterLink } from 'vue-router'
+import { onMounted, watch } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
 import { useOrderStore } from '@/features/products/orders/stores/useOrderStore'
+import { useAuthStore } from '@/features/auth/stores/useAuthStore'
 const orderStore = useOrderStore()
+const route = useRoute()
 onMounted(async () => {
-  await orderStore.getDeliveriesByDeliver(3)
+  const viewType = route.meta.viewType
+  if (viewType === 'personnal') {
+    if (useAuthStore().role === 'CUSTOMER') {
+      await orderStore.getDeliveriesByCustomer(useAuthStore().userId)
+    }
+    if (useAuthStore().role === 'DELIVER') {
+      await orderStore.getDeliveriesByDeliver(useAuthStore().userId)
+    }
+  }
+  if (viewType === 'dashboard') {
+    await orderStore.getDeliveries()
+  }
 })
 </script>
 
@@ -56,9 +69,7 @@ onMounted(async () => {
                 <h4 :class="['u-align-center u-text', `u-text-${index * 2 + 2}`]">
                   {{ mission.name }}
                 </h4>
-                <p :class="['u-align-center u-text', `u-text-${index * 2 + 3}`]">
-                  En préparation
-                </p>
+                <p :class="['u-align-center u-text', `u-text-${index * 2 + 3}`]">En préparation</p>
                 <p :class="['u-align-center u-text', `u-text-${index * 2 + 3}`]">
                   Nom du restaurant : {{ mission.orders[0]?.dish?.restaurant.name }}
                 </p>

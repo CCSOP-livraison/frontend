@@ -35,9 +35,16 @@ const router = createRouter({
       component: () => import('@/views/dashboard/ModerationView.vue'),
     },
     {
+      path: '/dashboard-deliver',
+      name: 'dashboard-deliver',
+      component: () => import('@/features/products/orders/components/Orders.vue'),
+      meta: { viewType: 'dashboard' },
+    },
+    {
       path: '/orders',
       name: 'orders',
       component: () => import('@/features/products/orders/components/Orders.vue'),
+      meta: { viewType: 'personnal' },
     },
     {
       path: '/restaurant/:id',

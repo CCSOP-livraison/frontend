@@ -2,6 +2,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useOrderStore } from '@/features/products/orders/stores/useOrderStore'
+import { useAuthStore } from '@/features/auth/stores/useAuthStore'
 const orderStore = useOrderStore()
 const route = useRoute()
 const idOrder = route.params.id
@@ -15,7 +16,10 @@ const order = ref({
 })
 console.log(orderStore.delivery.orders)
 const subtotal = computed(() => {
-  return orderStore.delivery?.orders?.reduce((acc, item) => acc + item.dish.price * item.quantity, 0)??0
+  return (
+    orderStore.delivery?.orders?.reduce((acc, item) => acc + item.dish.price * item.quantity, 0) ??
+    0
+  )
 })
 
 const taxRate = 0.1
@@ -62,7 +66,6 @@ const steps = computed(() => {
     },
   ]
 })
-
 </script>
 <template>
   <div class="order-tracking-page">
@@ -155,10 +158,15 @@ const steps = computed(() => {
         <hr />
         <div class="order-total">
           <span>Total payé</span>
-          <strong> {{finalPrice.toFixed(2)}} CHF</strong>
+          <strong> {{ finalPrice.toFixed(2) }} CHF</strong>
         </div>
       </div>
-      <div class="conteneur-btn">
+      <div v-if="useAuthStore().role === 'DELIVER'" class="conteneur-btn">
+        <button>Valider livraison</button>
+        <button v-if="orderStore.delivery.deliver">Echec de la livraison</button>
+        <button v-else>S'attribuer la livraison</button>
+      </div>
+      <div v-if="useAuthStore().role === 'CUSTOMER'" class="conteneur-btn">
         <button>Valider livraison</button>
         <button>Annuler livraison</button>
       </div>
