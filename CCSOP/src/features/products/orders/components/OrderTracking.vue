@@ -67,13 +67,13 @@ const steps = computed(() => {
     },
     {
       title: 'En cours de préparation',
-      description: 'Le commerçant prépare votre commande.',
+      description: 'Le commerce prépare votre commande.',
       completed: ['delivered', 'closed'].includes(statusKey),
       active: statusKey === 'preparing',
     },
     {
       title: 'Livrée',
-      description: 'Le livreur est arrivé vers chez vous.',
+      description: 'La personne chargée de la livraison est arrivée vers chez vous.',
       completed: ['closed'].includes(statusKey),
       active: statusKey === 'delivered',
     },
@@ -152,7 +152,7 @@ const steps = computed(() => {
 
         <!-- Contact Livreur -->
         <div class="card" v-if="orderStore.delivery.deliver && useAuthStore().role === 'CUSTOMER'">
-          <h3>🛵 Votre livreur</h3>
+          <h3>🛵 Votre livreur/livreuse</h3>
           <div class="delivery-person">
             <div>
               <p>
