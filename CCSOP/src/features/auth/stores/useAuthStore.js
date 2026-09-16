@@ -9,6 +9,7 @@ export const useAuthStore = defineStore('auth', () => {
   const isAuthenticated = ref(localStorage.getItem('isAuthenticated')||null)
   const userId=ref('')
   const role = ref('')
+
   function logout() {
     // 1. Réinitialiser les variables d'état
     message.value = null
@@ -99,4 +100,6 @@ export const useAuthStore = defineStore('auth', () => {
     register,
     logout
   }
+  },{
+    persist: true,
 })
