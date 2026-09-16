@@ -4,22 +4,14 @@ import LinkHeader from '@/components/LinkHeader.vue'
 
 <template>
   <header class="u-clearfix u-header u-sticky" id="header">
-    <div
-      class="u-clearfix u-sheet u-sheet-1"
-      style="
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-        min-height: 80px;
-      "
-    >
-      <RouterLink to="/">
-        <img alt="logo" src="../../public/images/default-logo.png" class="u-logo-image
-        u-logo-image-1" style="max-height: 50px; width: auto" />
+    <div class="u-clearfix u-sheet u-sheet-1 header-container">
+
+      <RouterLink to="/" class="logo-link">
+        <img
+          alt="logo"
+          src="../../public/images/default-logo.png"
+          class="u-logo-image u-logo-image-1"
+        />
       </RouterLink>
 
       <nav
@@ -29,7 +21,7 @@ import LinkHeader from '@/components/LinkHeader.vue'
       >
         <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px">
           <a
-            class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-hamburger-link u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+            class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-hamburger-link u-nav-link"
             href="#"
             tabindex="-1"
             aria-label="Open menu"
@@ -38,15 +30,7 @@ import LinkHeader from '@/components/LinkHeader.vue'
             <svg class="u-svg-link" viewBox="0 0 24 24">
               <use xlink:href="#menu-hamburger"></use>
             </svg>
-            <svg
-              class="u-svg-content"
-              id="menu-hamburger"
-              viewBox="0 0 16 16"
-              x="0px"
-              y="0px"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg class="u-svg-content" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px">
               <g>
                 <rect y="1" width="16" height="2"></rect>
                 <rect y="7" width="16" height="2"></rect>
@@ -56,14 +40,9 @@ import LinkHeader from '@/components/LinkHeader.vue'
           </a>
         </div>
 
+
         <div class="u-custom-menu u-nav-container">
-          <ul
-            class="u-nav u-unstyled u-nav-1"
-            role="menubar"
-            style="display: flex; align-items: center; gap: 25px; margin: 0"
-          >
-            <LinkHeader></LinkHeader>
-          </ul>
+          <LinkHeader />
         </div>
 
         <div
@@ -77,9 +56,9 @@ import LinkHeader from '@/components/LinkHeader.vue'
           >
             <div class="u-inner-container-layout u-sidenav-overflow">
               <div class="u-menu-close" tabindex="-1" aria-label="Close menu"></div>
-              <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2" role="menubar">
-                <LinkHeader></LinkHeader>
-              </ul>
+              <div class="u-align-center u-popupmenu-items">
+                <LinkHeader is-mobile />
+              </div>
             </div>
           </div>
           <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
@@ -92,5 +71,18 @@ import LinkHeader from '@/components/LinkHeader.vue'
 <style scoped>
 .u-header .u-sheet-1 {
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  min-height: 80px;
+}
+
+.u-logo-image-1 {
+  max-height: 50px;
+  width: auto;
 }
 </style>

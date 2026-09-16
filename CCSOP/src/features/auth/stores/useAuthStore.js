@@ -6,10 +6,21 @@ import router from '@/router'
 export const useAuthStore = defineStore('auth', () => {
   const message = ref('')
   const isError = ref(false)
-  const isAuthenticated = ref(false)
+  const isAuthenticated = ref(localStorage.getItem('isAuthenticated')||null)
   const userId=ref('')
   const role = ref('')
-      async function login(email, password) {
+  function logout() {
+    // 1. Réinitialiser les variables d'état
+    message.value = null
+    isError.value = null
+    isAuthenticated.value = null
+    userId.value= null
+    role.value = null
+
+    localStorage.removeItem('isAuthenticated')
+  }
+
+  async function login(email, password) {
         try {
           const response = await api.post('auth/login', {
             email: email,
@@ -85,6 +96,7 @@ export const useAuthStore = defineStore('auth', () => {
     isError,
     isAuthenticated,
     login,
-    register
+    register,
+    logout
   }
 })
