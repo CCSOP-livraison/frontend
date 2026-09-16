@@ -1,13 +1,12 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useOrderStore } from '@/features/products/orders/stores/useOrderStore'
 import { useAuthStore } from '@/features/auth/stores/useAuthStore'
-import router from '@/router'
 const route = useRoute()
+const router = useRouter()
 const orderStore = useOrderStore()
 const idOrder = route.params.id
-
 onMounted(async () => {
   await orderStore.getDelivery(idOrder)
 })
