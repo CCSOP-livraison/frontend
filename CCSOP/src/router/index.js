@@ -37,13 +37,13 @@ const router = createRouter({
     {
       path: '/dashboard-deliver',
       name: 'dashboard-deliver',
-      component: () => import('@/features/products/orders/components/Orders.vue'),
+      component: () => import('@/features/products/orders/components/OrdersView.vue'),
       meta: { viewType: 'dashboard' },
     },
     {
       path: '/orders',
       name: 'orders',
-      component: () => import('@/features/products/orders/components/Orders.vue'),
+      component: () => import('@/features/products/orders/components/OrdersView.vue'),
       meta: { viewType: 'personnal' },
     },
     {
@@ -59,7 +59,7 @@ const router = createRouter({
     {
       path: '/order/:id',
       name: 'order/:id',
-      component: () => import('@/features/products/orders/components/OrderTracking.vue'),
+      component: () => import('@/features/products/orders/components/OrderTrackingView.vue'),
     },
   ],
 })

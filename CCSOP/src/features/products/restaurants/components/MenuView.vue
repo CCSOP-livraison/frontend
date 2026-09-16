@@ -66,7 +66,6 @@ const finalPrice = computed(() => {
       id="cart-summary"
     >
       <div class="u-clearfix u-sheet u-sheet-1">
-        <!-- Bouton Retour -->
         <div class="back-btn-container">
           <button @click="goBack" class="back-btn">← Retour</button>
         </div>
@@ -145,7 +144,6 @@ const finalPrice = computed(() => {
 </template>
 
 <style scoped>
-/* Style pour le bouton Retour */
 .back-btn-container {
   display: flex;
   justify-content: flex-start;

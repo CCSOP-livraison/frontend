@@ -16,14 +16,12 @@ const goToMenu = () => {
   router.push(`/menu/${idRestaurant}`)
 }
 
-// Fonction pour retourner à la page précédente
 const goBack = () => {
   router.back()
 }
 </script>
 
 <template>
-  <!-- Remplacement de <body> par un conteneur flex global -->
   <div
     class="page-container u-grey-80 u-body u-clearfix u-xxl-mode"
     data-path-to-root="../"
@@ -32,7 +30,7 @@ const goBack = () => {
   >
     <section class="u-clearfix u-section-1" id="block-3">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <!-- Bouton Retour -->
+
         <div class="mb-6">
           <button
             @click="goBack"

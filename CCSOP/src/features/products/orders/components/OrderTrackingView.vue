@@ -1,19 +1,17 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router' // 1. Import de useRouter
+import { useRoute } from 'vue-router'
 import { useOrderStore } from '@/features/products/orders/stores/useOrderStore'
 import { useAuthStore } from '@/features/auth/stores/useAuthStore'
-
-const orderStore = useOrderStore()
+import router from '@/router'
 const route = useRoute()
-const router = useRouter() // 2. Initialisation du router
+const orderStore = useOrderStore()
 const idOrder = route.params.id
 
 onMounted(async () => {
   await orderStore.getDelivery(idOrder)
 })
 
-// 3. Fonction pour retourner en arrière
 function goBack() {
   router.back()
 }
@@ -90,16 +88,13 @@ const steps = computed(() => {
 <template>
   <div class="order-tracking-page">
     <div class="container">
-      <!-- 4. Bouton Retour -->
       <button class="btn-back" @click="goBack">← Retour</button>
 
-      <!-- En-tête de la commande -->
       <header class="order-header">
         <h1>Suivi de votre commande</h1>
         <p>numéro de commande : {{ orderStore.delivery.name }}</p>
       </header>
 
-      <!-- Temps estimé -->
       <div
         class="estimated-time-card"
         v-if="order.status !== 'delivered' && order.status !== 'cancelled'"
@@ -111,7 +106,6 @@ const steps = computed(() => {
         </div>
       </div>
 
-      <!-- Timeline de progression -->
       <div class="tracking-timeline">
         <h2>État d'avancement</h2>
         <div class="steps">
@@ -132,9 +126,7 @@ const steps = computed(() => {
         </div>
       </div>
 
-      <!-- Informations de livraison et du livreur -->
       <div class="info-grid">
-        <!-- Adresse -->
         <div class="card">
           <h3>📍 Adresse de livraison</h3>
           <p>
@@ -150,7 +142,6 @@ const steps = computed(() => {
           <p>Numéro de téléphone : {{ orderStore.delivery.customer?.phoneNumber }}</p>
         </div>
 
-        <!-- Contact Livreur -->
         <div class="card" v-if="orderStore.delivery.deliver && useAuthStore().role === 'CUSTOMER'">
           <h3>🛵 Votre livreur/livreuse</h3>
           <div class="delivery-person">
@@ -166,7 +157,6 @@ const steps = computed(() => {
           </div>
         </div>
 
-        <!-- Contact restaurant -->
         <div class="card" v-if="useAuthStore().role === 'DELIVER'">
           <h3>Le restaurant</h3>
           <div class="delivery-person">
@@ -184,7 +174,6 @@ const steps = computed(() => {
         </div>
       </div>
 
-      <!-- Détails des articles -->
       <div class="card order-items-card">
         <h3>🛍️ Articles commandés</h3>
         <ul class="items-list">
@@ -221,7 +210,6 @@ const steps = computed(() => {
 </template>
 
 <style scoped>
-/* Style spécifique pour le bouton retour */
 .btn-back {
   background-color: #e9ecef;
   color: #495057;
@@ -261,7 +249,6 @@ button {
     transform 0.1s;
 }
 
-/* Style général de la page */
 .order-tracking-page {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f8f9fa;
@@ -275,7 +262,6 @@ button {
   margin: 0 auto;
 }
 
-/* En-tête */
 .order-header {
   text-align: center;
   margin-bottom: 2rem;
@@ -286,7 +272,6 @@ button {
   margin-bottom: 0.5rem;
 }
 
-/* Carte temps estimé */
 .estimated-time-card {
   background: linear-gradient(135deg, #ff7e5f, #feb47b);
   color: white;
@@ -315,7 +300,6 @@ button {
   margin: 0;
 }
 
-/* Timeline */
 .tracking-timeline {
   background: white;
   padding: 1.5rem;
@@ -403,7 +387,6 @@ button {
   }
 }
 
-/* Grille d'informations */
 .info-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -441,7 +424,6 @@ button {
   gap: 1rem;
 }
 
-/* Liste des articles */
 .order-items-card .items-list {
   list-style: none;
   padding: 0;
