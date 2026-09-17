@@ -1,79 +1,137 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted } from 'vue'
+import { useRestaurantStore } from '@/features/products/restaurants/stores/useRestaurantStore'
+import { useRoute, useRouter } from 'vue-router'
 
-const restaurant = ref({
-  id: 1,
-  name: 'casa bianca',
-  description:
-    ' Lorem Ipsum&nbsp;is simply dummy text of the printing and typesetting industry. Lorem\n' +
-    "          Ipsum has been the industry's standard dummy text ever since 1966, when designers at\n" +
-    '          Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a\n' +
-    "          1914 Cicero translation and scrambled it to make dummy text for Letraset's Body Type\n" +
-    '          sheets. It has survived not only many decades, but also the leap into electronic\n' +
-    '          typesetting, remaining essentially unchanged. It was popularised thanks to these sheets\n' +
-    '          and more recently with desktop publishing software like Aldus PageMaker and Microsoft Word\n' +
-    '          including versions of Lorem Ipsum.Lorem Ipsum&nbsp;is simply dummy text of the printing\n' +
-    "          and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever\n" +
-    '          since 1966, when designers at Letraset and James Mosley, the librarian at St Bride\n' +
-    '          Printing Library in London, took a 1914 Cicero translation and scrambled it to make dummy\n' +
-    "          text for Letraset's Body Type sheets. It has survived not only many decades, but also the\n" +
-    '          leap into electronic typesetting, remaining essentially unchanged. It was popularised\n' +
-    '          thanks to these sheets and more recently with desktop publishing software like Aldus\n' +
-    '          PageMaker and Microsoft Word including versions of Lorem Ipsum.',
-  resume: 'Casa bianca, le buffet de pâtes de vos rêves',
-  image: '../../../public/images/photo-1473093295043-cdd812d0e601.jpeg',
-  imageWidth: '1280',
-  imageHeight: '854',
-  delay: '500',
+const restaurantStore = useRestaurantStore()
+const route = useRoute()
+const router = useRouter()
+const idRestaurant = route.params.id
+
+onMounted(async () => {
+  await restaurantStore.getRestaurant(idRestaurant)
 })
+
+const goToMenu = () => {
+  router.push(`/menu/${idRestaurant}`)
+}
+
+const goBack = () => {
+  router.back()
+}
 </script>
 
 <template>
-  <body
+  <div
+    class="page-container u-grey-80 u-body u-clearfix u-xxl-mode"
     data-path-to-root="../"
     data-include-products="false"
-    class="u-body u-clearfix u-xl-mode"
     data-lang="fr"
   >
-    <section class="u-clearfix u-grey-80 u-section-1" id="block-3">
+    <section class="u-clearfix u-section-1" id="block-3">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-restaurant-layout">
 
+        <div class="mb-6">
+          <button
+            @click="goBack"
+            class="px-4 py-2 text-sm font-semibold text-gray-300 bg-gray-700 hover:bg-gray-600 rounded-lg shadow transition-all duration-200 cursor-pointer border-none flex items-center gap-2"
+          >
+            ← Retour
+          </button>
+        </div>
+
+        <div class="u-restaurant-layout">
           <div class="u-column-left">
             <img
               class="u-expanded-width-xs u-image u-image-default u-image-1"
-              :src="restaurant.image"
+              :src="restaurantStore.restaurant.picture"
               alt=""
-              :data-image-width="restaurant.imageWidth"
-              :data-image-height="restaurant.imageHeight"
             />
-            <p class="u-text u-text-4">{{ restaurant.resume }}</p>
+            <p class="u-text u-text-4">{{ restaurantStore.restaurant.summary }}</p>
             <div class="u-btn-container">
-              <a
-                href="#"
-                class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius u-btn-1"
-                >modifier la carte</a
+              <button
+                @click="goToMenu()"
+                class="px-6 py-3 text-white font-semibold bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer text-center border-none"
               >
-              <RouterLink
-                class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius u-btn-2"
-                to="/menu"
-                >voir la carte</RouterLink
-              >
+                Voir la carte
+              </button>
+            </div>
+            <div class="restaurant-card">
+              <h2>Adresse</h2>
+              <address class="restaurant-address">
+                <span class="street">{{ restaurantStore.restaurant.address }}</span>
+                <span class="city-line">
+                  <span class="zipcode">{{ restaurantStore.restaurant.zipcode }}</span>
+                  <span class="locality">{{ restaurantStore.restaurant.locate }}</span>
+                </span>
+              </address>
             </div>
           </div>
 
-
           <div class="u-column-right">
-            <h1 class="u-text u-text-1">{{ restaurant.name }}</h1>
-            <p class="u-text u-text-3">{{ restaurant.description }}</p>
+            <h1 class="u-text u-text-1">{{ restaurantStore.restaurant.name }}</h1>
+            <p class="u-text u-text-3">{{ restaurantStore.restaurant.description }}</p>
           </div>
         </div>
       </div>
     </section>
-  </body>
+  </div>
 </template>
 
 <style scoped>
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 70vh;
+  margin: 0 auto;
+  max-width: 100%;
+  width: 100%;
+}
+
+.u-section-1 {
+  flex: 1;
+}
+
+.locality {
+  padding: 2%;
+}
+.restaurant-card h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #4694e3;
+  font-size: 1.25rem;
+}
+
+.restaurant-address {
+  font-style: normal;
+  line-height: 1.5;
+  color: #ffffff;
+}
+
+.street {
+  display: block;
+}
+
+.city-line {
+  display: block;
+  font-weight: 500;
+}
+
+button {
+  background-color: #4694e3;
+  color: #ffffff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+}
+
 .u-section-1 .u-sheet-1 {
   min-height: 711px;
   display: flex;
@@ -126,7 +184,6 @@ const restaurant = ref({
   margin-top: 10px;
 }
 
-.u-section-1 .u-btn-1,
 .u-section-1 .u-btn-2 {
   --radius: 50px;
   font-weight: 700;
@@ -135,13 +192,5 @@ const restaurant = ref({
   letter-spacing: 1px;
   padding: 9px 34px 11px 33px;
   margin: 0;
-}
-
-
-@media (max-width: 991px) {
-  .u-section-1 .u-restaurant-layout {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
 }
 </style>

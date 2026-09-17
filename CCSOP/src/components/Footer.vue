@@ -1,107 +1,128 @@
-<script setup></script>
-
 <template>
-  <footer
-    class="u-align-center u-clearfix u-container-align-center u-footer u-grey-80 u-footer"
-    id="footer"
-  >
-    <div class="u-clearfix u-sheet u-sheet-1">
-      <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1" role="navigation">
-        <div class="menu-collapse">
-          <a
-            class="u-button-style u-hamburger-link u-nav-link"
-            aria-label="Ouvrir le menu"
-            aria-controls="78af"
-            href="#"
-          >
-            <svg class="u-svg-link" viewBox="0 0 24 24"><use xlink:href="#svg-ad78"></use></svg>
-            <svg
-              class="u-svg-content"
+  <footer class="aesthetic-footer">
+    <div class="footer-container">
+      <!-- Section de gauche : Logo et description -->
+      <div class="footer-brand">
+        <h3 class="brand-title">{{ webSiteName }}<span>.</span></h3>
+        <p class="brand-desc">La livraison à domicile social et en circuit-court.</p>
+      </div>
 
-              id="svg-ad78"
-              viewBox="0 0 16 16"
-              x="0px"
-              y="0px"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g>
-                <rect y="1" width="16" height="2"></rect>
-                <rect y="7" width="16" height="2"></rect>
-                <rect y="13" width="16" height="2"></rect>
-              </g>
-            </svg>
-          </a>
-        </div>
-        <div class="u-nav-container"></div>
-        <div id="78af" role="region" aria-label="Panneau du menu" class="u-nav-container-collapse">
-          <div
-            class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav"
+      <!-- Section du milieu : Liens rapides -->
+      <div class="footer-links">
+        <h4>Liens rapides</h4>
+        <ul>
+          <li><router-link to="/">Accueil</router-link></li>
+          <li><router-link to="/contact">Contact</router-link></li>
+          <li><router-link to="/terms">Charte d'utilisation</router-link></li>
+          <li><router-link to="/general-conditions">Conditions générales</router-link></li>
+        </ul>
+      </div>
+
+      <!-- Section de droite : Réseaux sociaux -->
+      <div class="footer-social">
+        <h4>Valeurs</h4>
+        <div class="social-icons">
+          <a href="https://www.fedlex.admin.ch/eli/cc/2022/491/fr" target="_blank"
+            >protection des données</a
           >
-            <div class="u-inner-container-layout u-sidenav-overflow">
-              <div
-                class="u-menu-close"
-                tabindex="-1"
-                aria-controls="78af"
-                aria-label="Fermer le menu"
-              ></div>
-              <ul role="menubar" class="u-align-left u-nav u-popupmenu-items u-unstyled u-nav-1">
-                <li role="none" class="u-nav-item">
-                  <a role="menuitem" class="u-button-style u-nav-link" href="./"
-                    >register standard</a
-                  >
-                </li>
-                <li role="none" class="u-nav-item">
-                  <a
-                    role="menuitem"
-                    class="u-button-style u-nav-link"
-                    >register restaurateur</a
-                  >
-                </li>
-                <li role="none" class="u-nav-item">
-                </li>
-                <li role="none" class="u-nav-item">
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
-        </div>
-      </nav>
-      <div class="u-list u-list-1">
-        <div class="u-repeater u-repeater-1">
-          <div class="u-container-style u-list-item u-repeater-item">
-            <div class="u-container-layout u-similar-container u-container-layout-1">
-              <p class="u-text u-text-1">contact :</p>
-              <ul class="u-text u-text-2">
-                <li>tel : +41 12 345 67 89</li>
-                <li>mail : test@domaine.ch</li>
-              </ul>
-            </div>
-          </div>
-          <div class="u-container-style u-list-item u-repeater-item">
-            <div class="u-container-layout u-similar-container u-container-layout-2">
-              <p class="u-text u-text-3">liens autre</p>
-              <ul class="u-text u-text-4">
-                <li>accueil</li>
-                <li>se déconnecter</li>
-                <li>test1234</li>
-              </ul>
-            </div>
-          </div>
-          <div class="u-container-style u-list-item u-repeater-item">
-            <div class="u-container-layout u-similar-container u-container-layout-3">
-              <p class="u-text u-text-5">information légal :&nbsp;</p>
-              <ul class="u-text u-text-6">
-                <li><span class="u-text-palette-1-base">Charte d'utilisation des données</span></li>
-                <li><span class="u-text-palette-1-base">condition générale</span></li>
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
+    </div>
+
+    <!-- Barre de copyright -->
+    <div class="footer-bottom">
+      <p>&copy; {{ currentYear }} {{ webSiteName }}. Tous droits réservés.</p>
     </div>
   </footer>
 </template>
 
-<style scoped></style>
+<script>
+export default {
+  name: 'AestheticFooter',
+  data() {
+    return {
+      currentYear: new Date().getFullYear(),
+      webSiteName: 'CCSOP livraison',
+    }
+  },
+}
+</script>
+
+<style scoped>
+.aesthetic-footer {
+  background-color: #0f172a;
+  color: #94a3b8;
+  padding: 4rem 2rem 2rem;
+  font-family: 'Inter', sans-serif;
+  border-top: 1px solid #1e293b;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.brand-title {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.brand-title span {
+  color: #6366f1;
+}
+
+.brand-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.footer-links h4,
+.footer-social h4 {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-links a,
+.social-icons a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.footer-links a:hover,
+.social-icons a:hover {
+  color: #6366f1;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  border-top: 1px solid #1e293b;
+  text-align: center;
+  font-size: 0.85rem;
+}
+</style>

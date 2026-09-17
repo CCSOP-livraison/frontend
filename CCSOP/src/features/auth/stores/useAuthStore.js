@@ -6,14 +6,28 @@ import router from '@/router'
 export const useAuthStore = defineStore('auth', () => {
   const message = ref('')
   const isError = ref(false)
-  const isAuthenticated = ref(false)
-      async function login(email, password) {
+  const isAuthenticated = ref(localStorage.getItem('isAuthenticated')||null)
+  const userId=ref('')
+  const role = ref('')
+
+  function logout() {
+    message.value = null
+    isError.value = null
+    isAuthenticated.value = null
+    userId.value= null
+    role.value = null
+
+    localStorage.removeItem('isAuthenticated')
+  }
+
+  async function login(email, password) {
         try {
           const response = await api.post('auth/login', {
             email: email,
             password: password
           })
-          switch (response.data.roles[0].name) {
+          role.value = response.data.roles[0].name
+          switch (role.value) {
             case 'ADMIN':
               router.push('/dashboard-admin')
               break
@@ -24,12 +38,14 @@ export const useAuthStore = defineStore('auth', () => {
               router.push('/dashboard-customer')
               break
             case 'DELIVER':
-              router.push('/dashboard-worker')
+              router.push('/dashboard-deliver')
               break
           }
           isError.value = false
           isAuthenticated.value = true
-          message.value = "Connexion réussie !"
+          message.value = 'Connexion réussie !'
+          userId.value = response.data.id.toString()
+
         } catch (err) {
           console.error('Détail de l\'erreur:', err)
           message.value =
@@ -49,7 +65,7 @@ export const useAuthStore = defineStore('auth', () => {
     password,
   ) {
     try {
-      const response = await api.post('auth/register', {
+      const response = await api.post('auth/register', Request[{
         firstname: firstname,
         lastname: lastname,
         address: address,
@@ -58,11 +74,12 @@ export const useAuthStore = defineStore('auth', () => {
         phoneNumber: phoneNumber,
         email: email,
         password: password,
-      })
+      }])
 
       isError.value = false
       isAuthenticated.value = true
       message.value = 'Inscription réussie !'
+      userId.value = response.data.id.toString()
     } catch (err) {
       console.error("Détail de l'erreur:", err)
       message.value =
@@ -73,10 +90,15 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   return {
+    role,
+    userId,
     message,
     isError,
     isAuthenticated,
     login,
-    register
+    register,
+    logout
   }
+  },{
+    persist: true,
 })
