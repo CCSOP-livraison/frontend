@@ -1,6 +1,6 @@
 # CCSOP - frontend INFRASTRUCTURE
 
-**CCSOP**, une plateforme de livraison à domicile après commande auprès de restaurant dévelopé avec Spring Boot.
+**CCSOP**, une plateforme de livraison à domicile après commande auprès de restaurant dévelopé avec Vue.js .
 
 ---
 
