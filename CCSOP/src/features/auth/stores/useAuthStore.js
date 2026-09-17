@@ -11,7 +11,6 @@ export const useAuthStore = defineStore('auth', () => {
   const role = ref('')
 
   function logout() {
-    // 1. Réinitialiser les variables d'état
     message.value = null
     isError.value = null
     isAuthenticated.value = null
