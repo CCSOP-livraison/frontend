@@ -27,7 +27,6 @@ Un client peut choisir le restaurant dans lequel il souhaite commander et accéd
 ## Choix Technologiques 
 | Domaine | Technologie | Justification |
 |---|---|---|
-
 | Langage & Framework | Vue.js 3 | Écosystème mature et largement documenté. |
 
 ---
