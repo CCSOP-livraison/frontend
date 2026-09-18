@@ -90,6 +90,3 @@ L'équipe applique la spécification [Conventional Commits 1.0.0](https://www.co
 ## Guide utilisateur  
 Vous retrouverez le Guide utilisateur ici : [Guide utilisateur](https://github.com/CCSOP-livraison/.github/blob/main/profile/Guide-utilisateur.md)
 
-11. Aller sur "mes commandes"
-
-12. La commande est en état livré et si l'utilisateur la valide elle passe en état terminé.  
