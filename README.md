@@ -44,6 +44,10 @@ Un client peut choisir le restaurant dans lequel il souhaite commander et accéd
   - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
   - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
 ---
+### Definition of done 
+Les fonctionnalités ont été vérifié au travers de la [Definition of done](https://github.com/CCSOP-livraison/.github/blob/main/profile/definition-of-done.md)
+
+---
 
 ## Quick Start
 
@@ -85,38 +89,6 @@ L'équipe applique la spécification [Conventional Commits 1.0.0](https://www.co
 ---
 
 ## Guide utilisateur  
-### créer une commande
-1. Se connecter avec le compte client de **test** suivant ou créer un nouveau compte utilisateur: 
-email : camille.petit@example.com
-mot de passe : customer123
+Vous retrouverez le Guide utilisateur ici : [Guide utilisateur](https://github.com/CCSOP-livraison/.github/blob/main/profile/Guide-utilisateur.md) 
 
-2. Choisir un restaurant 
-
-3. Aller sur voir la carte 
-
-4. Choisir des plats et valider la commande 
-
-5. Se déconnecter du compte utilisateur 
-
-### s'assigner une livraison
-6. Se connecter avec le compte livreur de **test** suivant : 
-email : lucas.bernard@example.com
-mot de passe : deliver123
-
-7. Cliquer sur la commande créer précédement et se l'assigner
- 1. Scénario alternatif (pour simuler une vérification utilisateur de sa commande au moment où la commande est en cours de traitement): 
- 2. Se déconnecter 
- 3. Se connecter avec le compte de l'utilisateur test camille.petit@example.com  
- 4. Aller sur "mes commande"
- 5. Voir la commande, et là on peut voir "lucas bernard" comme livreur. 
-
-### Clôturé la livraison
-8. Clique sur la commande créer précédement et la valider 
-
-9. Se déconnecter 
-
-10. Se connecter avec le compte de l'utilisateur test camille.petit@example.com  
-
-11. Aller sur "mes commandes"
-
-12. La commande est en état livré et si l'utilisateur la valide elle passe en état terminé.  
+  
