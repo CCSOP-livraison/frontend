@@ -45,7 +45,8 @@ Un client peut choisir le restaurant dans lequel il souhaite commander et accéd
   - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
   - 
 ### Definition of done 
-Les fonctionnalités ont étaient vérifié au travers de la [Definition of done](https://github.com/CCSOP-livraison/.github/blob/main/profile/definition-of-done.md)
+Les fonctionnalités ont été vérifié au travers de la [Definition of done](https://github.com/CCSOP-livraison/.github/blob/main/profile/definition-of-done.md)
+
 ---
 
 ## Quick Start
